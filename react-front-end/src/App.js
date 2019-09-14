@@ -1,39 +1,34 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "./components/Navbar";
+import Table from "./components/Table";
 import "./App.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "Click the button to load data!"
-    };
-  }
+const testData = [
+  { product: "item", unit: 2, price: 5, total: 10 },
+  { product: "item1", unit: 4, price: 7, total: 28 },
+  { product: "item2", unit: 1, price: 6, total: 6 }
+];
 
-  fetchData = () => {
-    axios
-      .get("/api/data") // You can simply make your requests to "/api/whatever you want"
-      .then(response => {
-        // handle success
-        console.log(response.data); // The entire response from the Rails API
+export default function App(props) {
+  const [state, setState] = useState("");
 
-        console.log(response.data.message); // Just the message
-        this.setState({
-          message: response.data.message
-        });
+  const fetchData = () => {
+    axios.get("/api/data").then(response => {
+      console.log(response.data);
+      console.log(response.data.message);
+      setState({
+        message: response.data.message
       });
+    });
   };
 
-  render() {
-    return (
-      <div className="App">
-        <Navbar></Navbar>
-        <h1>{this.state.message}</h1>
-        <button onClick={this.fetchData}>Fetch Data</button>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Navbar></Navbar>
+      <button onClick={() => fetchData()}>FetchData</button>
+      <p>{state.message}</p>
+      <Table data={testData}></Table>
+    </div>
+  );
 }
-
-export default App;

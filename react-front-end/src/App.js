@@ -5,9 +5,13 @@ import Table from "./components/Table";
 import "./App.css";
 
 const testData = [
-  { product: "item", unit: 2, price: 5, total: 10 },
-  { product: "item1", unit: 4, price: 7, total: 28 },
-  { product: "item2", unit: 1, price: 6, total: 6 }
+  { product: "item", unit: 2, price: 5 },
+  { product: "item1", unit: 4, price: 7 },
+  { product: "item2", unit: 1, price: 6 },
+  { product: "item4", unit: 5, price: 7 },
+  { product: "item5", unit: 4, price: 7 },
+  { product: "item6", unit: 1, price: 6 },
+  { product: "item7", unit: 5, price: 7 }
 ];
 
 export default function App(props) {

@@ -22,7 +22,7 @@ export default function Table(props) {
                     <td>{data.product}</td>
                     <td>{data.unit}</td>
                     <td>{data.price}</td>
-                    <td>{data.total}</td>
+                    <td>{data.price * data.unit}</td>
                   </tr>
                 );
               })}

@@ -1,37 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import axios from "axios";
 import "./NewOrder.css";
 
 export default function NewOrder(props) {
-  const [newOrder, setNewOrder] = useState({
-    items: [
-      {
-        product: "",
-        unit: 0,
-        price: 0
-      }
-    ]
+  const ADD_ITEM = "ADD_ITEM";
+  const EDIT_ITEM = "EDIT_ITEM";
+
+  function reducer(orderDetails, action) {
+    switch (action.type) {
+      case ADD_ITEM:
+        return {
+          ...orderDetails,
+          items: [...orderDetails.items, { product: "", unit: 0, price: 0 }]
+        };
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+
+  const [newOrder, dispatch] = useReducer(reducer, {
+    customer: "",
+    items: []
   });
 
+  const [state, setState] = useState({});
+
   function addItem() {
-    setNewOrder(prev => [
-      ...prev.items,
-      {
-        product: "",
-        unit: 0,
-        price: 0
-      }
-    ]);
+    dispatch({ type: "ADD_ITEM" });
   }
 
   function onChangeHandler(event, index) {
     console.log(event.target.value);
     console.log(index);
-    setNewOrder(prev => {
-      const items = prev.items;
-      items[index].product = event.target.value;
-      return items;
-    });
   }
 
   function handleSubmit() {

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import Table from "./components/Table";
+import NewOrder from "./components/NewOrder";
 import "./App.css";
 
 const testData = [
@@ -38,19 +39,15 @@ export default function App(props) {
         <div>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/new">New Order</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
+              <Link to="/history">Order History</Link>
             </li>
           </ul>
           <hr />
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
+          <Route path="/new" component={NewOrder} />
+          <Route path="/history" component={History} />
         </div>
       </Router>
     </div>

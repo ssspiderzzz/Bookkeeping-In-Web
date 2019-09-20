@@ -39,15 +39,19 @@ export default function App(props) {
         <div>
           <ul>
             <li>
-              <Link to="/new">New Order</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/history">Order History</Link>
+              <Link to="/new">New Order</Link>
             </li>
+            {/* <li>
+              <Link to="/history">Order History</Link>
+            </li> */}
           </ul>
           <hr />
+          <Route path="/" />
           <Route path="/new" component={NewOrder} />
-          <Route path="/history" component={History} />
+          {/* <Route path="/history" component={History} /> */}
         </div>
       </Router>
     </div>

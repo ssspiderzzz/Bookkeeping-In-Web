@@ -13,6 +13,14 @@ export default function NewOrder(props) {
           ...orderDetails,
           items: [...orderDetails.items, { product: "", unit: 0, price: 0 }]
         };
+      case EDIT_ITEM:
+        return {
+          ...orderDetails,
+          items: [
+            ...orderDetails.items,
+            { product: action.value, unit: 0, price: 0 }
+          ]
+        };
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -25,15 +33,18 @@ export default function NewOrder(props) {
     items: []
   });
 
-  const [state, setState] = useState({});
-
   function addItem() {
     dispatch({ type: "ADD_ITEM" });
   }
 
-  function onChangeHandler(event, index) {
+  function onChangeHandler(event, current_index) {
     console.log(event.target.value);
-    console.log(index);
+    console.log(current_index);
+    dispatch({
+      type: "EDIT_ITEM",
+      index: current_index,
+      value: event.target.value
+    });
   }
 
   function handleSubmit() {
@@ -62,11 +73,10 @@ export default function NewOrder(props) {
                   <td>
                     <input
                       onChange={event => onChangeHandler(event, index)}
-                      value={item.product}
                     ></input>
                   </td>
                   <td>
-                    <input></input>
+                    <input value={item.product}></input>
                   </td>
                   <td>
                     <input></input>

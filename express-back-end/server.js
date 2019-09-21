@@ -16,7 +16,7 @@ App.get("/api/data", (req, res) =>
 );
 
 App.post("/api/new", (req, res) => {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   res.json({
     message: "Post sent!"
   });

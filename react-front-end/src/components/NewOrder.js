@@ -1,49 +1,25 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
+import reducer, { ADD_ITEM, EDIT_ITEM } from "../reducer/application";
 import axios from "axios";
 import "./NewOrder.css";
 
 export default function NewOrder(props) {
-  const ADD_ITEM = "ADD_ITEM";
-  const EDIT_ITEM = "EDIT_ITEM";
-
-  function reducer(orderDetails, action) {
-    switch (action.type) {
-      case ADD_ITEM:
-        return {
-          ...orderDetails,
-          items: [...orderDetails.items, { product: "", unit: 0, price: 0 }]
-        };
-      case EDIT_ITEM:
-        return {
-          ...orderDetails,
-          items: [
-            ...orderDetails.items,
-            { product: action.value, unit: 0, price: 0 }
-          ]
-        };
-      default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
-    }
-  }
-
   const [newOrder, dispatch] = useReducer(reducer, {
     customer: "",
-    items: []
+    items: {}
   });
 
   function addItem() {
-    dispatch({ type: "ADD_ITEM" });
+    let id = Object.keys(newOrder.items).length + 1;
+    dispatch({ type: ADD_ITEM, id: id });
   }
 
-  function onChangeHandler(event, current_index) {
-    console.log(event.target.value);
-    console.log(current_index);
+  function onChangeHandler(event, current_index, current_field) {
     dispatch({
-      type: "EDIT_ITEM",
-      index: current_index,
-      value: event.target.value
+      type: EDIT_ITEM,
+      id: current_index + 1,
+      value: event.target.value,
+      field: current_field
     });
   }
 
@@ -67,19 +43,28 @@ export default function NewOrder(props) {
             </tr>
           </thead>
           <tbody>
-            {newOrder.items.map((item, index) => {
+            {Object.keys(newOrder.items).map((id, index) => {
               return (
                 <tr key={index}>
                   <td>
                     <input
-                      onChange={event => onChangeHandler(event, index)}
+                      onChange={event =>
+                        onChangeHandler(event, index, "product")
+                      }
+                      value={newOrder.items[id].product}
                     ></input>
                   </td>
                   <td>
-                    <input value={item.product}></input>
+                    <input
+                      onChange={event => onChangeHandler(event, index, "unit")}
+                      value={newOrder.items[id].unit}
+                    ></input>
                   </td>
                   <td>
-                    <input></input>
+                    <input
+                      onChange={event => onChangeHandler(event, index, "price")}
+                      value={newOrder.items[id].price}
+                    ></input>
                   </td>
                   <td>
                     <input></input>

@@ -1,17 +1,32 @@
 import React, { useReducer } from "react";
-import reducer, { ADD_ITEM, EDIT_ITEM } from "../reducer/application";
+import reducer, {
+  ADD_ITEM,
+  EDIT_ITEM,
+  EDIT_GENERAL_INFO
+} from "../reducer/application";
 import axios from "axios";
 import "./NewOrder.css";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
     customer: "",
+    status: "",
+    address: "",
+    tele: "",
     items: {}
   });
 
   function addItem() {
     let id = Object.keys(newOrder.items).length + 1;
     dispatch({ type: ADD_ITEM, id: id });
+  }
+
+  function onGeneralInfoChange(event, current_field) {
+    dispatch({
+      type: EDIT_GENERAL_INFO,
+      value: event.target.value,
+      field: current_field
+    });
   }
 
   function onChangeHandler(event, current_index, current_field) {
@@ -35,6 +50,22 @@ export default function NewOrder(props) {
       <div id="tableRoot">
         <table className="box-table">
           <thead id="tableHead">
+            <tr id="customer_status">
+              <th>Customer</th>
+              <th>
+                <input
+                  onChange={event => onGeneralInfoChange(event, "customer")}
+                  value={newOrder.customer}
+                ></input>
+              </th>
+              <th>Order Status</th>
+              <th>
+                <input
+                  onChange={event => onGeneralInfoChange(event, "status")}
+                  value={newOrder.status}
+                ></input>
+              </th>
+            </tr>
             <tr>
               <th scope="col">Product</th>
               <th scope="col">Unit</th>
@@ -66,9 +97,7 @@ export default function NewOrder(props) {
                       value={newOrder.items[id].price}
                     ></input>
                   </td>
-                  <td>
-                    <input></input>
-                  </td>
+                  <td>{newOrder.items[id].unit * newOrder.items[id].price}</td>
                 </tr>
               );
             })}

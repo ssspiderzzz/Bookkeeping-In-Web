@@ -1,5 +1,6 @@
 export const ADD_ITEM = "ADD_ITEM";
 export const EDIT_ITEM = "EDIT_ITEM";
+export const EDIT_GENERAL_INFO = "EDIT_GENERAL_INFO";
 
 export default function reducer(orderDetails, action) {
   switch (action.type) {
@@ -14,6 +15,11 @@ export default function reducer(orderDetails, action) {
             price: ""
           }
         }
+      };
+    case EDIT_GENERAL_INFO:
+      return {
+        ...orderDetails,
+        [action.field]: action.value
       };
     case EDIT_ITEM:
       return {

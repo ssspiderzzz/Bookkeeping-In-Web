@@ -9,10 +9,11 @@ import "./NewOrder.css";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
-    customer: "",
+    name: "",
     status: "",
     address: "",
-    tele: "",
+    phone_number: "",
+    note: "",
     items: {}
   });
 
@@ -40,7 +41,7 @@ export default function NewOrder(props) {
 
   function handleSubmit() {
     axios
-      .post("/api/new", { body: newOrder })
+      .post("/api/new", { newOrder: newOrder })
       .then(res => console.log(res))
       .catch(err => console.log(err));
   }
@@ -54,8 +55,8 @@ export default function NewOrder(props) {
               <th>Customer</th>
               <th>
                 <input
-                  onChange={event => onGeneralInfoChange(event, "customer")}
-                  value={newOrder.customer}
+                  onChange={event => onGeneralInfoChange(event, "name")}
+                  value={newOrder.name}
                 ></input>
               </th>
               <th>Order Status</th>
@@ -68,7 +69,7 @@ export default function NewOrder(props) {
             </tr>
             <tr>
               <th scope="col">Product</th>
-              <th scope="col">Unit</th>
+              <th scope="col">Quantity</th>
               <th scope="col">Price</th>
               <th scope="col">Total</th>
             </tr>
@@ -80,15 +81,17 @@ export default function NewOrder(props) {
                   <td>
                     <input
                       onChange={event =>
-                        onChangeHandler(event, index, "product")
+                        onChangeHandler(event, index, "description")
                       }
-                      value={newOrder.items[id].product}
+                      value={newOrder.items[id].description}
                     ></input>
                   </td>
                   <td>
                     <input
-                      onChange={event => onChangeHandler(event, index, "unit")}
-                      value={newOrder.items[id].unit}
+                      onChange={event =>
+                        onChangeHandler(event, index, "quantity")
+                      }
+                      value={newOrder.items[id].quantity}
                     ></input>
                   </td>
                   <td>
@@ -97,7 +100,9 @@ export default function NewOrder(props) {
                       value={newOrder.items[id].price}
                     ></input>
                   </td>
-                  <td>{newOrder.items[id].unit * newOrder.items[id].price}</td>
+                  <td>
+                    {newOrder.items[id].quantity * newOrder.items[id].price}
+                  </td>
                 </tr>
               );
             })}

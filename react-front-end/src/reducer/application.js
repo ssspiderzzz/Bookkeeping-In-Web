@@ -10,8 +10,8 @@ export default function reducer(orderDetails, action) {
         items: {
           ...orderDetails.items,
           [action.id]: {
-            product: "",
-            unit: "",
+            description: "",
+            quantity: "",
             price: ""
           }
         }

@@ -8,6 +8,12 @@ export default function Table(props) {
         <div id="tableRoot">
           <table className="box-table">
             <thead id="tableHead">
+              <tr id="customer_status">
+                <th>Customer</th>
+                <th></th>
+                <th>Order Status</th>
+                <th></th>
+              </tr>
               <tr>
                 <th scope="col">Product</th>
                 <th scope="col">Unit</th>

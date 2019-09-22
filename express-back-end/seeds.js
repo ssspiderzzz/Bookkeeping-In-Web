@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 require("dotenv").config();
 const fs = require("fs");
 
-const pool = new Pool({
+const db = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
@@ -10,7 +10,7 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
-pool.connect((error, client) => {
+db.connect((error, client) => {
   console.log(process.env.DB_HOST);
   if (error) {
     console.log(error);

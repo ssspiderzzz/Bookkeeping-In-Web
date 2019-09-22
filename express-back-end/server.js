@@ -2,6 +2,25 @@ const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
 const PORT = 8080;
+const { Pool } = require("pg");
+require("dotenv").config();
+
+const db = new Pool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
+
+db.connect((error, client) => {
+  console.log(process.env.DB_HOST);
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("connected");
+  }
+});
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -17,9 +36,44 @@ App.get("/api/data", (req, res) =>
 
 App.post("/api/new", (req, res) => {
   console.log(JSON.stringify(req.body));
-  res.json({
-    message: "Post sent!"
-  });
+  db.query(
+    `
+    INSERT INTO customers (name, phone_number, address)
+    VALUES ($1, $2, $3)
+    RETURNING id;
+    `,
+    [req.body.newOrder.name, 0, req.body.newOrder.address]
+  )
+    .then(data1 => {
+      console.log(data1.rows[0].id);
+      db.query(
+        `
+        INSERT INTO orders (order_status, note, customer_id)
+        VALUES ($1, $2, $3)
+        RETURNING id;
+        `,
+        [req.body.newOrder.status, req.body.newOrder.note, data1.rows[0].id]
+      ).then(data2 => {
+        console.log(data2.rows[0].id);
+        for (let item in req.body.newOrder.items) {
+          db.query(
+            `
+            INSERT INTO items (description, price, quantity, sub_total, order_id)
+            VALUES ($1, $2, $3, $4, $5)
+            `,
+            [
+              item.description,
+              item.price,
+              item.quantity,
+              item.price * item.quantity,
+              data2.rows[0].id
+            ]
+          );
+        }
+        res.json({ message: "New Order Created!" });
+      });
+    })
+    .catch(err => console.log(err));
 });
 
 App.listen(PORT, () => {

@@ -55,17 +55,19 @@ App.post("/api/new", (req, res) => {
         [req.body.newOrder.status, req.body.newOrder.note, data1.rows[0].id]
       ).then(data2 => {
         console.log(data2.rows[0].id);
-        for (let item in req.body.newOrder.items) {
+        for (let item of Object.keys(req.body.newOrder.items)) {
+          console.log(req.body.newOrder.items[item]);
           db.query(
             `
             INSERT INTO items (description, price, quantity, sub_total, order_id)
             VALUES ($1, $2, $3, $4, $5)
             `,
             [
-              item.description,
-              item.price,
-              item.quantity,
-              item.price * item.quantity,
+              req.body.newOrder.items[item].description,
+              Number(req.body.newOrder.items[item].price),
+              Number(req.body.newOrder.items[item].quantity),
+              Number(req.body.newOrder.items[item].price) *
+                Number(req.body.newOrder.items[item].quantity),
               data2.rows[0].id
             ]
           );

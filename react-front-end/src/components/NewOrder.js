@@ -50,7 +50,7 @@ export default function NewOrder(props) {
 
   return (
     <React.Fragment>
-      <div id="tableRoot">
+      <div id="newOrderTable">
         <table className="box-table">
           <thead id="tableHead">
             <tr id="customer_status">

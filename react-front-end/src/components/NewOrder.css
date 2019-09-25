@@ -1,4 +1,4 @@
-#tableRoot {
+#newOrderTable {
   border: 4px outset #a4471c;
   border-radius: 8px;
   box-shadow: 20px 16px 44px -16px rgba(101, 101, 102, 1);
@@ -13,12 +13,6 @@
   opacity: 0.6;
   overflow: auto;
   color: black;
-}
-
-#airlinelogo {
-  opacity: 1;
-  filter: brightness(1);
-  background-color: white;
 }
 
 table {

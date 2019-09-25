@@ -42,7 +42,9 @@ export default function NewOrder(props) {
   function handleSubmit() {
     axios
       .post("/api/new", { newOrder: newOrder })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(`redirect`);
+      })
       .catch(err => console.log(err));
   }
 
@@ -88,6 +90,12 @@ export default function NewOrder(props) {
                   </td>
                   <td>
                     <input
+                      onChange={event => onChangeHandler(event, index, "price")}
+                      value={newOrder.items[id].price}
+                    ></input>
+                  </td>
+                  <td>
+                    <input
                       onChange={event =>
                         onChangeHandler(event, index, "quantity")
                       }
@@ -95,13 +103,7 @@ export default function NewOrder(props) {
                     ></input>
                   </td>
                   <td>
-                    <input
-                      onChange={event => onChangeHandler(event, index, "price")}
-                      value={newOrder.items[id].price}
-                    ></input>
-                  </td>
-                  <td>
-                    {newOrder.items[id].quantity * newOrder.items[id].price}
+                    {newOrder.items[id].price * newOrder.items[id].quantity}
                   </td>
                 </tr>
               );

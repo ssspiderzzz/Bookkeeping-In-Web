@@ -28,11 +28,20 @@ App.use(BodyParser.json());
 App.use(Express.static("public"));
 
 // Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Seems to work!"
-  })
-);
+App.get("/api/data", (req, res) => {
+  db.query(
+    `
+    SELECT * 
+    FROM orders JOIN customers ON customer_id = customers.id
+    `
+  )
+    .then(data1 => {
+      db.query(`SELECT * FROM items`).then(data2 => {
+        res.json({ orders: data1, items: data2 });
+      });
+    })
+    .catch(err => console.log(err));
+});
 
 App.post("/api/new", (req, res) => {
   console.log(JSON.stringify(req.body));
@@ -56,23 +65,25 @@ App.post("/api/new", (req, res) => {
       ).then(data2 => {
         console.log(data2.rows[0].id);
         for (let item of Object.keys(req.body.newOrder.items)) {
-          console.log(req.body.newOrder.items[item]);
-          db.query(
-            `
+          if (req.body.newOrder.items[item].description) {
+            console.log(req.body.newOrder.items[item]);
+            db.query(
+              `
             INSERT INTO items (description, price, quantity, sub_total, order_id)
             VALUES ($1, $2, $3, $4, $5)
             `,
-            [
-              req.body.newOrder.items[item].description,
-              Number(req.body.newOrder.items[item].price),
-              Number(req.body.newOrder.items[item].quantity),
-              Number(req.body.newOrder.items[item].price) *
+              [
+                req.body.newOrder.items[item].description,
+                Number(req.body.newOrder.items[item].price),
                 Number(req.body.newOrder.items[item].quantity),
-              data2.rows[0].id
-            ]
-          );
+                Number(req.body.newOrder.items[item].price) *
+                  Number(req.body.newOrder.items[item].quantity),
+                data2.rows[0].id
+              ]
+            );
+          }
         }
-        res.json({ message: "New Order Created!" });
+        res.redirect("/");
       });
     })
     .catch(err => console.log(err));

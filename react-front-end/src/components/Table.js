@@ -1,4 +1,5 @@
 import React from "react";
+import { toLocaleTime } from "../helpers/functions";
 import "./Table.css";
 
 export default function Table(props) {
@@ -14,13 +15,13 @@ export default function Table(props) {
                     <th>Order ID</th>
                     <th>{order.id}</th>
                     <th>Date Created</th>
-                    <th>{order.date_create}</th>
+                    <th>{toLocaleTime(order.date_create)}</th>
                   </tr>
                   <tr id="customer_status">
                     <th>Customer</th>
                     <th>{order.name}</th>
                     <th>Order Status</th>
-                    <th>{order.status}</th>
+                    <th>{order.order_status}</th>
                   </tr>
                   <tr>
                     <th scope="col">Product</th>

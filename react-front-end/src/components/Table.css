@@ -39,9 +39,16 @@ th {
 }
 
 #tableHead {
-  background-color: #1e90ff;
   color: white;
   letter-spacing: -1px;
+}
+
+thead tr:nth-child(odd) {
+  background-color: #1d60ee;
+}
+
+thead tr:nth-child(even) {
+  background-color: #a972f7;
 }
 
 tbody tr {
@@ -75,4 +82,14 @@ tbody tr:nth-child(even) {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #0000cd;
+}
+
+#button_group {
+  text-align: right;
+}
+
+#edit_button,
+#delete_button {
+  height: 40px;
+  margin-right: 10px;
 }

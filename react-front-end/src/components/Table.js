@@ -1,6 +1,8 @@
 import React from "react";
 import { toLocaleTime } from "../helpers/functions";
 import "./Table.css";
+import edit_icon from "./images/edit-64.png";
+import delete_icon from "./images/delete-40.png";
 
 export default function Table(props) {
   return (
@@ -8,43 +10,59 @@ export default function Table(props) {
       {props.orders &&
         props.orders.map((order, order_index) => {
           return (
-            <div id="tableRoot" key={order_index}>
-              <table className="box-table">
-                <thead id="tableHead">
-                  <tr id="order_id">
-                    <th>Order ID</th>
-                    <th>{order.id}</th>
-                    <th>Date Created</th>
-                    <th>{toLocaleTime(order.date_create)}</th>
-                  </tr>
-                  <tr id="customer_status">
-                    <th>Customer</th>
-                    <th>{order.name}</th>
-                    <th>Order Status</th>
-                    <th>{order.order_status}</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.items.map((item, item_index) => {
-                    return (
-                      item.order_id === order.id && (
-                        <tr key={item_index}>
-                          <td>{item.description}</td>
-                          <td>{item.price}</td>
-                          <td>{item.quantity}</td>
-                          <td>{item.price * item.quantity}</td>
-                        </tr>
-                      )
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div key={order_index}>
+              <div id="tableRoot">
+                <table className="box-table">
+                  <thead id="tableHead">
+                    <tr id="order_id">
+                      <th>Order ID</th>
+                      <th>{order.id}</th>
+                      <th>Date Created</th>
+                      <th>{toLocaleTime(order.date_create)}</th>
+                    </tr>
+                    <tr id="customer_status">
+                      <th>Customer</th>
+                      <th>{order.name}</th>
+                      <th>Order Status</th>
+                      <th>{order.order_status}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {props.items.map((item, item_index) => {
+                      return (
+                        item.order_id === order.id && (
+                          <tr key={item_index}>
+                            <td>{item.description}</td>
+                            <td>{item.price}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.price * item.quantity}</td>
+                          </tr>
+                        )
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <div id="button_group">
+                <input
+                  id="edit_button"
+                  type="image"
+                  src={edit_icon}
+                  alt="Edit"
+                ></input>
+                <input
+                  id="delete_button"
+                  type="image"
+                  src={delete_icon}
+                  alt="Delete"
+                ></input>
+              </div>
             </div>
           );
         })}

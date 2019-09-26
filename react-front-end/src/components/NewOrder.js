@@ -1,10 +1,4 @@
 import React, { useReducer, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
 import reducer, {
   ADD_ITEM,
   EDIT_ITEM,

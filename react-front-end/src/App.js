@@ -23,23 +23,23 @@ export default function App(props) {
   return (
     <div className="App">
       <Navbar></Navbar>
-      <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/new">New Order</Link>
-            </li>
-          </ul>
-          <hr />
-          <Route exact path="/" />
-          <Route path="/new" component={NewOrder} />
-        </div>
-      </Router>
+      <div id="main">
+        <Router>
+          <div id="nav_button">
+            <Link to="/">
+              <span id="home_button">Home</span>
+            </Link>
+            <Link to="/new">
+              <span id="new_button">New Order</span>
+            </Link>
+            <hr />
+            <Route exact path="/" />
+            <Route path="/new" component={NewOrder} />
+          </div>
+        </Router>
 
-      <Table orders={state.orders} items={state.items}></Table>
+        <Table orders={state.orders} items={state.items}></Table>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,12 @@ export default function Table(props) {
             <div id="tableRoot" key={order_index}>
               <table className="box-table">
                 <thead id="tableHead">
+                  <tr id="order_id">
+                    <th>Order ID</th>
+                    <th>{order.id}</th>
+                    <th>Date Created</th>
+                    <th>{order.date_create}</th>
+                  </tr>
                   <tr id="customer_status">
                     <th>Customer</th>
                     <th>{order.name}</th>

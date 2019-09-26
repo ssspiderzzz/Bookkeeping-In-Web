@@ -15,6 +15,10 @@
   color: black;
 }
 
+#errorEmpty {
+  color: red;
+}
+
 table {
   width: 100%;
   overflow-wrap: break-word;

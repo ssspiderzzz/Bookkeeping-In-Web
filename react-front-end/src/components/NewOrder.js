@@ -1,4 +1,10 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import reducer, {
   ADD_ITEM,
   EDIT_ITEM,
@@ -16,6 +22,8 @@ export default function NewOrder(props) {
     note: "",
     items: {}
   });
+
+  const [errorCheck, setErrorCheck] = useState(false);
 
   function addItem() {
     let id = Object.keys(newOrder.items).length + 1;
@@ -40,16 +48,24 @@ export default function NewOrder(props) {
   }
 
   function handleSubmit() {
-    axios
-      .post("/api/new", { newOrder: newOrder })
-      .then(res => {
-        console.log(`redirect`);
-      })
-      .catch(err => console.log(err));
+    if (newOrder.name && newOrder.status) {
+      axios
+        .post("/api/new", { newOrder: newOrder })
+        .then(() => {
+          window.location.href = "/";
+        })
+        .catch(err => console.log(err));
+      setErrorCheck(false);
+    } else {
+      setErrorCheck(true);
+    }
   }
 
   return (
     <React.Fragment>
+      {errorCheck && (
+        <div id="errorEmpty">Please enter Customer Name and Status.</div>
+      )}
       <div id="newOrderTable">
         <table className="box-table">
           <thead id="tableHead">

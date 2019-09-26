@@ -25,16 +25,16 @@ export default function Table(props) {
                 </thead>
                 <tbody>
                   {props.items.map((item, item_index) => {
-                    if (item.order_id === order.id) {
-                      return (
+                    return (
+                      item.order_id === order.id && (
                         <tr key={item_index}>
                           <td>{item.description}</td>
                           <td>{item.price}</td>
                           <td>{item.quantity}</td>
                           <td>{item.price * item.quantity}</td>
                         </tr>
-                      );
-                    }
+                      )
+                    );
                   })}
                 </tbody>
               </table>

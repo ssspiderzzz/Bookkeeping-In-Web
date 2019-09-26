@@ -6,6 +6,8 @@ import reducer, {
 } from "../reducer/application";
 import axios from "axios";
 import "./NewOrder.css";
+import add_icon from "./images/add-64.png";
+import check_icon from "./images/check-64.png";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
@@ -121,8 +123,29 @@ export default function NewOrder(props) {
           </tbody>
         </table>
       </div>
-      <button onClick={addItem}>Add New Item</button>
-      <button onClick={handleSubmit}>Submit</button>
+      <div id="button_group">
+        <span id="add_text">Add Item</span>
+        <span>
+          <input
+            id="add_button"
+            type="image"
+            src={add_icon}
+            alt="Add"
+            onClick={addItem}
+          ></input>
+        </span>
+        <span id="check_text">Submit</span>
+        <span>
+          <input
+            id="check_button"
+            type="image"
+            src={check_icon}
+            alt="Check"
+            onClick={handleSubmit}
+          ></input>
+        </span>
+      </div>
+      <hr />
     </React.Fragment>
   );
 }

@@ -17,3 +17,14 @@ code {
 a {
   text-decoration: none;
 }
+
+#button_group {
+  text-align: right;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+span {
+  vertical-align: middle;
+}

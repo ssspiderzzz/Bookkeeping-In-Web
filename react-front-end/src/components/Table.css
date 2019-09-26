@@ -86,10 +86,26 @@ tbody tr:nth-child(even) {
 
 #button_group {
   text-align: right;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+span {
+  vertical-align: middle;
 }
 
 #edit_button,
 #delete_button {
   height: 40px;
+  margin-right: 10px;
+  outline: none;
+}
+
+#edit_text,
+#delete_text {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: inline;
   margin-right: 10px;
 }

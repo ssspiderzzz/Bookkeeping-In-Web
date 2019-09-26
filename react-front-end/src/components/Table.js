@@ -50,18 +50,24 @@ export default function Table(props) {
                 </table>
               </div>
               <div id="button_group">
-                <input
-                  id="edit_button"
-                  type="image"
-                  src={edit_icon}
-                  alt="Edit"
-                ></input>
-                <input
-                  id="delete_button"
-                  type="image"
-                  src={delete_icon}
-                  alt="Delete"
-                ></input>
+                <span id="edit_text">Edit</span>
+                <span>
+                  <input
+                    id="edit_button"
+                    type="image"
+                    src={edit_icon}
+                    alt="Edit"
+                  ></input>
+                </span>
+                <span id="delete_text">Delete</span>
+                <span>
+                  <input
+                    id="delete_button"
+                    type="image"
+                    src={delete_icon}
+                    alt="Delete"
+                  ></input>
+                </span>
               </div>
             </div>
           );

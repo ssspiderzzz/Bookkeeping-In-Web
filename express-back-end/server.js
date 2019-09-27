@@ -53,7 +53,6 @@ App.post("/api/new", (req, res) => {
     [req.body.newOrder.name, 0, req.body.newOrder.address]
   )
     .then(data1 => {
-      console.log(data1.rows[0].id);
       db.query(
         `
         INSERT INTO orders (order_status, note, customer_id)
@@ -62,7 +61,6 @@ App.post("/api/new", (req, res) => {
         `,
         [req.body.newOrder.status, req.body.newOrder.note, data1.rows[0].id]
       ).then(data2 => {
-        console.log(data2.rows[0].id);
         for (let item of Object.keys(req.body.newOrder.items)) {
           if (req.body.newOrder.items[item].description) {
             console.log(req.body.newOrder.items[item]);
@@ -84,6 +82,24 @@ App.post("/api/new", (req, res) => {
         }
         res.redirect("/");
       });
+    })
+    .catch(err => console.log(err));
+});
+
+App.post("/api/delete/:id", (req, res) => {
+  db.query(
+    `
+  DELETE FROM items WHERE order_id = $1;
+  `,
+    [req.params.id]
+  )
+    .then(() => {
+      db.query(
+        `
+    DELETE FROM orders WHERE orders.id = $1;
+    `,
+        [req.params.id]
+      ).then(res.json(`Order Delete!`));
     })
     .catch(err => console.log(err));
 });

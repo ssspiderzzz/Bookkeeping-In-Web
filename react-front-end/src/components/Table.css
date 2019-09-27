@@ -98,3 +98,8 @@ tbody tr:nth-child(even) {
   display: inline;
   margin-right: 10px;
 }
+
+#delete_message {
+  color: red;
+  margin-right: 10px;
+}

@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { toLocaleTime } from "../helpers/functions";
+import axios from "axios";
 import "./Table.css";
 import edit_icon from "./images/edit-64.png";
 import delete_icon from "./images/delete-40.png";
 
 export default function Table(props) {
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const [deleteID, setDeleteID] = useState("");
+
+  function handleDelete(id) {
+    axios
+      .post(`/api/delete/${id}`)
+      .then(() => {
+        setDeleteID(id);
+        setDeleteMessage(
+          `Order#${id} has been deleted. Page would be refreshed in 3 seconds.`
+        );
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <React.Fragment>
       {props.orders &&
@@ -50,6 +69,9 @@ export default function Table(props) {
                 </table>
               </div>
               <div id="button_group">
+                {deleteMessage && deleteID === order.id && (
+                  <span id="delete_message">{deleteMessage}</span>
+                )}
                 <span id="edit_text">Edit</span>
                 <span>
                   <input
@@ -66,6 +88,7 @@ export default function Table(props) {
                     type="image"
                     src={delete_icon}
                     alt="Delete"
+                    onClick={() => handleDelete(order.id)}
                   ></input>
                 </span>
               </div>

@@ -27,7 +27,7 @@ export default function App(props) {
         <Router>
           <div id="nav_button">
             <Link to="/">
-              <span id="home_button">Home</span>
+              <span id="home_button">Home Page</span>
             </Link>
             <Link to="/new">
               <span id="new_button">New Order</span>

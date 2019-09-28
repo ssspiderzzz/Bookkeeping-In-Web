@@ -7,10 +7,9 @@ import delete_icon from "./images/delete-40.png";
 export default function EachOrder(props) {
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteID, setDeleteID] = useState("");
-  const [editID, setEditID] = useState("");
 
   function handleEdit(id) {
-    setEditID(id);
+    props.setEditID(id);
   }
 
   function handleDelete(id) {
@@ -31,73 +30,69 @@ export default function EachOrder(props) {
   return (
     <React.Fragment>
       <div key={props.order_index}>
-        {props.order.id !== editID && (
-          <React.Fragment>
-            <div id="tableRoot">
-              <table className="box-table">
-                <thead id="tableHead">
-                  <tr id="order_id">
-                    <th>Order ID</th>
-                    <th>{props.order.id}</th>
-                    <th>Date Created</th>
-                    <th>{toLocaleTime(props.order.date_create)}</th>
-                  </tr>
-                  <tr id="customer_status">
-                    <th>Customer</th>
-                    <th>{props.order.name}</th>
-                    <th>Order Status</th>
-                    <th>{props.order.order_status}</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.items.map((item, item_index) => {
-                    return (
-                      item.order_id === props.order.id && (
-                        <tr key={item_index}>
-                          <td>{item.description}</td>
-                          <td>{item.price}</td>
-                          <td>{item.quantity}</td>
-                          <td>{item.price * item.quantity}</td>
-                        </tr>
-                      )
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <div id="button_group">
-              {deleteMessage && deleteID === props.order.id && (
-                <span id="delete_message">{deleteMessage}</span>
-              )}
-              <span id="edit_text">Edit</span>
-              <span>
-                <input
-                  id="edit_button"
-                  type="image"
-                  src={edit_icon}
-                  alt="Edit"
-                  onClick={() => handleEdit(props.order.id)}
-                ></input>
-              </span>
-              <span id="delete_text">Delete</span>
-              <span>
-                <input
-                  id="delete_button"
-                  type="image"
-                  src={delete_icon}
-                  alt="Delete"
-                  onClick={() => handleDelete(props.order.id)}
-                ></input>
-              </span>
-            </div>
-          </React.Fragment>
-        )}
+        <div id="tableRoot">
+          <table className="box-table">
+            <thead id="tableHead">
+              <tr id="order_id">
+                <th>Order ID</th>
+                <th>{props.order.id}</th>
+                <th>Date Created</th>
+                <th>{toLocaleTime(props.order.date_create)}</th>
+              </tr>
+              <tr id="customer_status">
+                <th>Customer</th>
+                <th>{props.order.name}</th>
+                <th>Order Status</th>
+                <th>{props.order.order_status}</th>
+              </tr>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.items.map((item, item_index) => {
+                return (
+                  item.order_id === props.order.id && (
+                    <tr key={item_index}>
+                      <td>{item.description}</td>
+                      <td>{item.price}</td>
+                      <td>{item.quantity}</td>
+                      <td>{item.price * item.quantity}</td>
+                    </tr>
+                  )
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div id="button_group">
+          {deleteMessage && deleteID === props.order.id && (
+            <span id="delete_message">{deleteMessage}</span>
+          )}
+          <span id="edit_text">Edit</span>
+          <span>
+            <input
+              id="edit_button"
+              type="image"
+              src={edit_icon}
+              alt="Edit"
+              onClick={() => handleEdit(props.order.id)}
+            ></input>
+          </span>
+          <span id="delete_text">Delete</span>
+          <span>
+            <input
+              id="delete_button"
+              type="image"
+              src={delete_icon}
+              alt="Delete"
+              onClick={() => handleDelete(props.order.id)}
+            ></input>
+          </span>
+        </div>
       </div>
     </React.Fragment>
   );

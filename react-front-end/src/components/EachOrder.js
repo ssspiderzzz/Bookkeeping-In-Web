@@ -55,14 +55,12 @@ export default function EachOrder(props) {
             <tbody>
               {props.items.map((item, item_index) => {
                 return (
-                  item.order_id === props.order.id && (
-                    <tr key={item_index}>
-                      <td>{item.description}</td>
-                      <td>{item.price}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.price * item.quantity}</td>
-                    </tr>
-                  )
+                  <tr key={item_index}>
+                    <td>{item.description}</td>
+                    <td>{item.price}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.price * item.quantity}</td>
+                  </tr>
                 );
               })}
             </tbody>

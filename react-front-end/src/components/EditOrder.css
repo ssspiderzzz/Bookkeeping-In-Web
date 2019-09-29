@@ -1,0 +1,91 @@
+#editOrderTable {
+  border: 4px outset #a4471c;
+  border-radius: 8px;
+  box-shadow: 20px 16px 44px -16px rgba(101, 101, 102, 1);
+  width: 100%;
+  max-height: 85%;
+  max-width: 800px;
+  background-color: white;
+  top: 60px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  opacity: 0.6;
+  overflow: auto;
+  color: black;
+}
+
+#errorEmpty {
+  color: red;
+}
+
+table {
+  width: 100%;
+  overflow-wrap: break-word;
+  vertical-align: middle;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+  width: 25%;
+}
+
+#tableHead {
+  background-color: #1e90ff;
+  color: white;
+  letter-spacing: -1px;
+}
+
+tbody tr {
+  line-height: 10px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #aad4fe;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f7d489;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1e90ff;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0000cd;
+}
+
+#add_button,
+#check_button {
+  height: 40px;
+  margin-right: 10px;
+  outline: none;
+}
+
+#add_text,
+#check_text {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: inline;
+  margin-right: 10px;
+}

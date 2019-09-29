@@ -4,25 +4,28 @@ import reducer, {
   EDIT_ITEM,
   EDIT_GENERAL_INFO
 } from "../reducer/application";
+import { toLocaleTime } from "../helpers/functions";
 import axios from "axios";
-import "./NewOrder.css";
+import "./EditOrder.css";
 import add_icon from "./images/add-64.png";
 import check_icon from "./images/check-64.png";
 
-export default function NewOrder(props) {
-  const [newOrder, dispatch] = useReducer(reducer, {
-    name: "",
-    status: "",
+export default function EditOrder(props) {
+  const [editOrder, dispatch] = useReducer(reducer, {
+    id: props.order.id,
+    date_create: props.order.date_create,
+    name: props.order.name,
+    status: props.order.order_status,
     address: "",
     phone_number: "",
     note: "",
-    items: {}
+    items: props.items
   });
 
   const [errorCheck, setErrorCheck] = useState(false);
 
   function addItem() {
-    let id = Object.keys(newOrder.items).length + 1;
+    let id = Object.keys(editOrder.items).length + 1;
     dispatch({ type: ADD_ITEM, id: id });
   }
 
@@ -44,17 +47,17 @@ export default function NewOrder(props) {
   }
 
   function handleSubmit() {
-    if (newOrder.name && newOrder.status) {
-      axios
-        .post("/api/new", { newOrder: newOrder })
-        .then(() => {
-          window.location.href = "/";
-        })
-        .catch(err => console.log(err));
-      setErrorCheck(false);
-    } else {
-      setErrorCheck(true);
-    }
+    // if (editOrder.name && editOrder.status) {
+    //   axios
+    //     .post("/api/new", { editOrder: editOrder })
+    //     .then(() => {
+    //       window.location.href = "/";
+    //     })
+    //     .catch(err => console.log(err));
+    //   setErrorCheck(false);
+    // } else {
+    //   setErrorCheck(true);
+    // }
   }
 
   return (
@@ -62,28 +65,28 @@ export default function NewOrder(props) {
       {errorCheck && (
         <div id="errorEmpty">Please enter Customer Name and Status.</div>
       )}
-      <div id="newOrderTable">
+      <div id="editOrderTable">
         <table className="box-table">
           <thead id="tableHead">
             <tr id="order_id">
               <th>Order ID</th>
-              <th></th>
+              <th>{editOrder.id}</th>
               <th>Date Created</th>
-              <th></th>
+              <th>{toLocaleTime(editOrder.date_create)}</th>
             </tr>
             <tr id="customer_status">
               <th>Customer</th>
               <th>
                 <input
                   onChange={event => onGeneralInfoChange(event, "name")}
-                  value={newOrder.name}
+                  value={editOrder.name}
                 ></input>
               </th>
               <th>Order Status</th>
               <th>
                 <input
                   onChange={event => onGeneralInfoChange(event, "status")}
-                  value={newOrder.status}
+                  value={editOrder.status}
                 ></input>
               </th>
             </tr>
@@ -95,7 +98,7 @@ export default function NewOrder(props) {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(newOrder.items).map((id, index) => {
+            {Object.keys(editOrder.items).map((id, index) => {
               return (
                 <tr key={index}>
                   <td>
@@ -103,13 +106,13 @@ export default function NewOrder(props) {
                       onChange={event =>
                         onChangeHandler(event, index, "description")
                       }
-                      value={newOrder.items[id].description}
+                      value={editOrder.items[id].description}
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={event => onChangeHandler(event, index, "price")}
-                      value={newOrder.items[id].price}
+                      value={editOrder.items[id].price}
                     ></input>
                   </td>
                   <td>
@@ -117,11 +120,11 @@ export default function NewOrder(props) {
                       onChange={event =>
                         onChangeHandler(event, index, "quantity")
                       }
-                      value={newOrder.items[id].quantity}
+                      value={editOrder.items[id].quantity}
                     ></input>
                   </td>
                   <td>
-                    {newOrder.items[id].price * newOrder.items[id].quantity}
+                    {editOrder.items[id].price * editOrder.items[id].quantity}
                   </td>
                 </tr>
               );

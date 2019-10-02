@@ -10,15 +10,17 @@ export default function Table(props) {
     <React.Fragment>
       {props.orders &&
         props.orders.map((order, order_index) => {
-          const order_items = props.items.filter(
-            item => item.order_id === order.id
-          );
+          // changing the format of items from array to object
+          // keeping codes consistancy between NewOrder and EditOrder pages
+          const order_items = {};
+          props.items
+            .filter(item => item.order_id === order.id)
+            .map((item, item_index) => (order_items[item_index] = item));
           return (
-            <React.Fragment>
+            <React.Fragment key={order_index}>
               {order.id !== editID && (
                 <EachOrder
                   order={order}
-                  order_index={order_index}
                   items={order_items}
                   setEditID={setEditID}
                 />
@@ -26,7 +28,6 @@ export default function Table(props) {
               {order.id === editID && (
                 <EditOrder
                   order={order}
-                  order_index={order_index}
                   items={order_items}
                   setEditID={setEditID}
                 />

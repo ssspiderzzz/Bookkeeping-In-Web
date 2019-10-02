@@ -12,7 +12,8 @@ import check_icon from "./images/check-64.png";
 
 export default function EditOrder(props) {
   const [editOrder, dispatch] = useReducer(reducer, {
-    id: props.order.id,
+    order_id: props.order.id,
+    customer_id: props.order.customer_id,
     date_create: props.order.date_create,
     name: props.order.name,
     status: props.order.order_status,
@@ -47,17 +48,18 @@ export default function EditOrder(props) {
   }
 
   function handleSubmit() {
-    // if (editOrder.name && editOrder.status) {
-    //   axios
-    //     .post("/api/new", { editOrder: editOrder })
-    //     .then(() => {
-    //       window.location.href = "/";
-    //     })
-    //     .catch(err => console.log(err));
-    //   setErrorCheck(false);
-    // } else {
-    //   setErrorCheck(true);
-    // }
+    if (editOrder.name && editOrder.status) {
+      axios
+        .post("/api/edit/", { editOrder: editOrder })
+        .then(() => {
+          window.location.href = "/";
+        })
+        .catch(err => console.log(err));
+      setErrorCheck(false);
+      props.setEditID("");
+    } else {
+      setErrorCheck(true);
+    }
   }
 
   return (
@@ -70,7 +72,7 @@ export default function EditOrder(props) {
           <thead id="tableHead">
             <tr id="order_id">
               <th>Order ID</th>
-              <th>{editOrder.id}</th>
+              <th>{editOrder.order_id}</th>
               <th>Date Created</th>
               <th>{toLocaleTime(editOrder.date_create)}</th>
             </tr>
@@ -143,7 +145,7 @@ export default function EditOrder(props) {
             onClick={addItem}
           ></input>
         </span>
-        <span id="check_text">Submit</span>
+        <span id="check_text">Save Changes</span>
         <span>
           <input
             id="check_button"
@@ -154,7 +156,6 @@ export default function EditOrder(props) {
           ></input>
         </span>
       </div>
-      <hr />
     </React.Fragment>
   );
 }

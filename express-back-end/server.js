@@ -104,6 +104,55 @@ App.post("/api/delete/:id", (req, res) => {
     .catch(err => console.log(err));
 });
 
+App.post("/api/edit", (req, res) => {
+  console.log(JSON.stringify(req.body));
+  db.query(
+    `
+    UPDATE customers
+    SET name = $1, phone_number = $2, address = $3
+    WHERE id = $4;
+    `,
+    [
+      req.body.editOrder.name,
+      req.body.editOrder.phone_number,
+      req.body.editOrder.address,
+      req.body.editOrder.customer_id
+    ]
+  ).then(data1 => res.json(data1));
+  //   .then(data1 => {
+  //     db.query(
+  //       `
+  //       UPDATE orders (order_status, note, customer_id)
+  //       VALUES ($1, $2, $3)
+  //       RETURNING id;
+  //       `,
+  //       [req.body.editOrder.status, req.body.editOrder.note, data1.rows[0].id]
+  //     ).then(data2 => {
+  //       for (let item of Object.keys(req.body.editOrder.items)) {
+  //         if (req.body.editOrder.items[item].description) {
+  //           console.log(req.body.editOrder.items[item]);
+  //           db.query(
+  //             `
+  //           UPDATE items (description, price, quantity, sub_total, order_id)
+  //           VALUES ($1, $2, $3, $4, $5)
+  //           `,
+  //             [
+  //               req.body.editOrder.items[item].description,
+  //               Number(req.body.editOrder.items[item].price),
+  //               Number(req.body.editOrder.items[item].quantity),
+  //               Number(req.body.editOrder.items[item].price) *
+  //                 Number(req.body.editOrder.items[item].quantity),
+  //               data2.rows[0].id
+  //             ]
+  //           );
+  //         }
+  //       }
+  //       res.redirect("/");
+  //     });
+  //   })
+  //   .catch(err => console.log(err));
+});
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(

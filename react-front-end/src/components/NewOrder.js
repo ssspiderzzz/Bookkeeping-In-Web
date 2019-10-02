@@ -34,10 +34,10 @@ export default function NewOrder(props) {
     });
   }
 
-  function onChangeHandler(event, current_index, current_field) {
+  function onChangeHandler(event, id, current_field) {
     dispatch({
       type: EDIT_ITEM,
-      id: current_index + 1,
+      id: id,
       value: event.target.value,
       field: current_field
     });
@@ -101,22 +101,20 @@ export default function NewOrder(props) {
                   <td>
                     <input
                       onChange={event =>
-                        onChangeHandler(event, index, "description")
+                        onChangeHandler(event, id, "description")
                       }
                       value={newOrder.items[id].description}
                     ></input>
                   </td>
                   <td>
                     <input
-                      onChange={event => onChangeHandler(event, index, "price")}
+                      onChange={event => onChangeHandler(event, id, "price")}
                       value={newOrder.items[id].price}
                     ></input>
                   </td>
                   <td>
                     <input
-                      onChange={event =>
-                        onChangeHandler(event, index, "quantity")
-                      }
+                      onChange={event => onChangeHandler(event, id, "quantity")}
                       value={newOrder.items[id].quantity}
                     ></input>
                   </td>

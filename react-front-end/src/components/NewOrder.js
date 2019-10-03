@@ -12,7 +12,7 @@ import check_icon from "./images/check-64.png";
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
     name: "",
-    status: "",
+    order_status: "",
     address: "",
     phone_number: "",
     note: "",
@@ -44,7 +44,7 @@ export default function NewOrder(props) {
   }
 
   function handleSubmit() {
-    if (newOrder.name && newOrder.status) {
+    if (newOrder.name && newOrder.order_status) {
       axios
         .post("/api/new", { newOrder: newOrder })
         .then(() => {
@@ -82,8 +82,8 @@ export default function NewOrder(props) {
               <th>Order Status</th>
               <th>
                 <input
-                  onChange={event => onGeneralInfoChange(event, "status")}
-                  value={newOrder.status}
+                  onChange={event => onGeneralInfoChange(event, "order_status")}
+                  value={newOrder.order_status}
                 ></input>
               </th>
             </tr>

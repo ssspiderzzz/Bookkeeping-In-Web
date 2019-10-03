@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import _ from "lodash";
 import Navbar from "./components/Navbar";
 import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
@@ -14,8 +15,8 @@ export default function App(props) {
       console.log(res.data.orders.rows);
       console.log(res.data.items.rows);
       setState({
-        orders: res.data.orders.rows,
-        items: res.data.items.rows
+        orders: _.sortBy(res.data.orders.rows, "id"),
+        items: _.sortBy(res.data.items.rows)
       });
     });
   }, []);

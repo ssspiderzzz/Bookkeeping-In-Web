@@ -53,7 +53,7 @@ export default function EditOrder(props) {
       axios
         .post("/api/edit/", { editOrder: editOrder })
         .then(() => {
-          window.location.href = "/";
+          props.setRefresh(true);
         })
         .catch(err => console.log(err));
       setErrorCheck(false);

@@ -43,7 +43,7 @@ App.get("/api/data", (req, res) => {
 });
 
 App.post("/api/new", (req, res) => {
-  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body, null, "\t"));
   db.query(
     `
     INSERT INTO customers (name, phone_number, address)
@@ -103,13 +103,13 @@ App.post("/api/delete/:id", (req, res) => {
     DELETE FROM orders WHERE orders.id = $1;
     `,
         [req.params.id]
-      ).then(res.json(`Order Delete!`));
+      ).then(res.json(`Order had been deleted!`));
     })
     .catch(err => console.log(err));
 });
 
 App.post("/api/edit", (req, res) => {
-  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body, null, "\t"));
   db.query(
     `
     UPDATE customers
@@ -153,7 +153,7 @@ App.post("/api/edit", (req, res) => {
                 req.body.editOrder.items[item].id
               ]
             );
-          } else {
+          } else if (req.body.editOrder.items[item].description) {
             db.query(
               `
                   INSERT INTO items (description, price, quantity, sub_total, order_id)

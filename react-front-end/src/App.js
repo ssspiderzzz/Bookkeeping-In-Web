@@ -9,6 +9,7 @@ import "./App.css";
 
 export default function App(props) {
   const [state, setState] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     axios.get("/api/data").then(res => {
@@ -18,8 +19,9 @@ export default function App(props) {
         orders: _.sortBy(res.data.orders.rows, "id"),
         items: _.sortBy(res.data.items.rows, "id")
       });
+      setRefresh(false);
     });
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="App">
@@ -39,7 +41,11 @@ export default function App(props) {
           </div>
         </Router>
 
-        <Table orders={state.orders} items={state.items}></Table>
+        <Table
+          orders={state.orders}
+          items={state.items}
+          setRefresh={setRefresh}
+        ></Table>
       </div>
     </div>
   );

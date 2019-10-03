@@ -23,6 +23,7 @@ export default function Table(props) {
                   order={order}
                   items={order_items}
                   setEditID={setEditID}
+                  setRefresh={props.setRefresh}
                 />
               )}
               {order.id === editID && (
@@ -30,6 +31,7 @@ export default function Table(props) {
                   order={order}
                   items={order_items}
                   setEditID={setEditID}
+                  setRefresh={props.setRefresh}
                 />
               )}
             </React.Fragment>

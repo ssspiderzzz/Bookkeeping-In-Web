@@ -21,7 +21,7 @@ export default function EachOrder(props) {
           `Order#${id} has been deleted. Page would be refreshed in 3 seconds.`
         );
         setTimeout(() => {
-          window.location.href = "/";
+          props.setRefresh(true);
         }, 3000);
       })
       .catch(err => console.log(err));

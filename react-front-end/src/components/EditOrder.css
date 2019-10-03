@@ -76,14 +76,16 @@ tbody tr:nth-child(even) {
 }
 
 #add_button,
-#check_button {
+#check_button,
+#back_button {
   height: 40px;
   margin-right: 10px;
   outline: none;
 }
 
 #add_text,
-#check_text {
+#check_text,
+#back_text {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   display: inline;

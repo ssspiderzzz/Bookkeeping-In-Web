@@ -16,7 +16,7 @@ export default function App(props) {
       console.log(res.data.items.rows);
       setState({
         orders: _.sortBy(res.data.orders.rows, "id"),
-        items: _.sortBy(res.data.items.rows)
+        items: _.sortBy(res.data.items.rows, "id")
       });
     });
   }, []);

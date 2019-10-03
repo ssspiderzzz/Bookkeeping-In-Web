@@ -9,6 +9,7 @@ import axios from "axios";
 import "./EditOrder.css";
 import add_icon from "./images/add-64.png";
 import check_icon from "./images/check-64.png";
+import back_icon from "./images/back-64.png";
 
 export default function EditOrder(props) {
   const [editOrder, dispatch] = useReducer(reducer, {
@@ -60,6 +61,10 @@ export default function EditOrder(props) {
     } else {
       setErrorCheck(true);
     }
+  }
+
+  function back() {
+    props.setEditID("");
   }
 
   return (
@@ -133,6 +138,16 @@ export default function EditOrder(props) {
         </table>
       </div>
       <div id="button_group">
+        <span id="back_text">Cancel Changes</span>
+        <span>
+          <input
+            id="back_button"
+            type="image"
+            src={back_icon}
+            alt="Back"
+            onClick={back}
+          ></input>
+        </span>
         <span id="add_text">Add Item</span>
         <span>
           <input

@@ -92,7 +92,7 @@ export default function EditOrder(props) {
               </th>
               <th>Order Status</th>
               <th>
-                {editOrder.order_status}
+                <span>{editOrder.order_status}</span>
                 <DropdownList onGeneralInfoChange={onGeneralInfoChange} />
               </th>
             </tr>

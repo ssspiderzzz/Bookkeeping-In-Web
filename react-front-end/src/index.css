@@ -19,8 +19,11 @@ a {
   text-decoration: none;
 }
 
-td > input th > input {
-  width: 100%;
+td input,
+th input {
+  width: 90%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #button_group {

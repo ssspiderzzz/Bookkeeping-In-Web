@@ -86,7 +86,7 @@ export default function NewOrder(props) {
               </th>
               <th>Order Status</th>
               <th>
-                {newOrder.order_status}
+                <span>{newOrder.order_status}</span>
                 <DropdownList onGeneralInfoChange={onGeneralInfoChange} />
               </th>
             </tr>

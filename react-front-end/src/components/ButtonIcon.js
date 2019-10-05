@@ -15,6 +15,22 @@ export default function ButtonIcon(props) {
       icon = add_icon;
       text = "Add Item";
       break;
+    case "check":
+      icon = check_icon;
+      text = "Save";
+      break;
+    case "back":
+      icon = back_icon;
+      text = "Cancel Changes";
+      break;
+    case "edit":
+      icon = edit_icon;
+      text = "Edit";
+      break;
+    case "delete":
+      icon = delete_icon;
+      text = "Delete";
+      break;
     default:
       console.log("Undefined icon type!");
   }

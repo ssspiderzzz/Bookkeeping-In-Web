@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { toLocaleTime } from "../helpers/functions";
 import axios from "axios";
-import edit_icon from "./images/edit-64.png";
-import delete_icon from "./images/delete-40.png";
+import ButtonIcon from "./ButtonIcon";
 
 export default function EachOrder(props) {
   const [deleteMessage, setDeleteMessage] = useState("");
@@ -69,26 +68,14 @@ export default function EachOrder(props) {
         {deleteMessage && deleteID === props.order.id && (
           <span id="delete_message">{deleteMessage}</span>
         )}
-        <span id="edit_text">Edit</span>
-        <span>
-          <input
-            id="edit_button"
-            type="image"
-            src={edit_icon}
-            alt="Edit"
-            onClick={() => handleEdit(props.order.id)}
-          ></input>
-        </span>
-        <span id="delete_text">Delete</span>
-        <span>
-          <input
-            id="delete_button"
-            type="image"
-            src={delete_icon}
-            alt="Delete"
-            onClick={() => handleDelete(props.order.id)}
-          ></input>
-        </span>
+        <ButtonIcon
+          icon_type="edit"
+          action={() => handleEdit(props.order.id)}
+        />
+        <ButtonIcon
+          icon_type="delete"
+          action={() => handleDelete(props.order.id)}
+        />
       </div>
     </React.Fragment>
   );

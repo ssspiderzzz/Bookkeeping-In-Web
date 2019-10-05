@@ -7,9 +7,6 @@ import reducer, {
 import { toLocaleTime } from "../helpers/functions";
 import axios from "axios";
 import "./EditOrder.css";
-import add_icon from "./images/add-64.png";
-import check_icon from "./images/check-64.png";
-import back_icon from "./images/back-64.png";
 import DropdownList from "./DropdownList";
 import ButtonIcon from "./ButtonIcon";
 
@@ -138,37 +135,9 @@ export default function EditOrder(props) {
         </table>
       </div>
       <div id="button_group">
+        <ButtonIcon icon_type="back" action={back} />
         <ButtonIcon icon_type="add" action={addItem} />
-        <span id="back_text">Cancel Changes</span>
-        <span>
-          <input
-            id="back_button"
-            type="image"
-            src={back_icon}
-            alt="Back"
-            onClick={back}
-          ></input>
-        </span>
-        <span id="add_text">Add Item</span>
-        <span>
-          <input
-            id="add_button"
-            type="image"
-            src={add_icon}
-            alt="Add"
-            onClick={addItem}
-          ></input>
-        </span>
-        <span id="check_text">Save Changes</span>
-        <span>
-          <input
-            id="check_button"
-            type="image"
-            src={check_icon}
-            alt="Check"
-            onClick={handleSubmit}
-          ></input>
-        </span>
+        <ButtonIcon icon_type="check" action={handleSubmit} />
       </div>
     </React.Fragment>
   );

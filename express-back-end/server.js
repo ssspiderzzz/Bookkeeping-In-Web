@@ -43,7 +43,7 @@ App.get("/api/data", (req, res) => {
 });
 
 App.post("/api/new", (req, res) => {
-  console.log(JSON.stringify(req.body, null, "\t"));
+  console.log(JSON.stringify(req.body, null, 2));
   db.query(
     `
     INSERT INTO customers (name, phone_number, address)
@@ -109,7 +109,7 @@ App.post("/api/delete/:id", (req, res) => {
 });
 
 App.post("/api/edit", (req, res) => {
-  console.log(JSON.stringify(req.body, null, "\t"));
+  console.log(JSON.stringify(req.body, null, 2));
   db.query(
     `
     UPDATE customers
@@ -177,7 +177,6 @@ App.post("/api/edit", (req, res) => {
 });
 
 App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
   );

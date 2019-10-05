@@ -18,12 +18,6 @@
   color: black;
 }
 
-#airlinelogo {
-  opacity: 1;
-  filter: brightness(1);
-  background-color: white;
-}
-
 table {
   width: 100%;
   overflow-wrap: break-word;

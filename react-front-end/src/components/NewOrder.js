@@ -8,6 +8,7 @@ import axios from "axios";
 import "./NewOrder.css";
 import add_icon from "./images/add-64.png";
 import check_icon from "./images/check-64.png";
+import DropdownList from "./DropdownList";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
@@ -81,10 +82,8 @@ export default function NewOrder(props) {
               </th>
               <th>Order Status</th>
               <th>
-                <input
-                  onChange={event => onGeneralInfoChange(event, "order_status")}
-                  value={newOrder.order_status}
-                ></input>
+                {newOrder.order_status}
+                <DropdownList onGeneralInfoChange={onGeneralInfoChange} />
               </th>
             </tr>
             <tr>

@@ -1,0 +1,34 @@
+import React from "react";
+import "./DropdownList.css";
+import dropdown_icon from "./images/dropdown-48.png";
+
+export default function DropdownList(props) {
+  const user_setting = [
+    "Waiting for Payment",
+    "Paid",
+    "Shipping",
+    "Delivering",
+    "Done"
+  ];
+
+  return (
+    <div class="dropdown">
+      <img alt="dropdown_icon" src={dropdown_icon} class="dropbtn"></img>
+      <div class="dropdown-content">
+        {user_setting.map(status => {
+          return (
+            <React.Fragment>
+              <input
+                type="button"
+                onClick={event =>
+                  props.onGeneralInfoChange(event, "order_status")
+                }
+                value={status}
+              ></input>
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

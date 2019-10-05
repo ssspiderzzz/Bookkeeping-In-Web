@@ -11,6 +11,7 @@ import add_icon from "./images/add-64.png";
 import check_icon from "./images/check-64.png";
 import back_icon from "./images/back-64.png";
 import DropdownList from "./DropdownList";
+import ButtonIcon from "./ButtonIcon";
 
 export default function EditOrder(props) {
   const [editOrder, dispatch] = useReducer(reducer, {
@@ -137,6 +138,7 @@ export default function EditOrder(props) {
         </table>
       </div>
       <div id="button_group">
+        <ButtonIcon icon_type="add" action={addItem} />
         <span id="back_text">Cancel Changes</span>
         <span>
           <input

@@ -1,7 +1,7 @@
 .dropdown {
   vertical-align: middle;
+  float: right;
   position: relative;
-  display: inline-block;
 }
 
 .dropbtn {
@@ -12,6 +12,7 @@
 
 .dropdown-content {
   border-radius: 5px;
+  padding: 1px;
   display: none;
   right: 0;
   position: absolute;

@@ -17,7 +17,11 @@ export default function NewOrder(props) {
     address: "",
     phone_number: "",
     note: "",
-    items: {}
+    items: {
+      1: { description: "", price: "", quantity: "" },
+      2: { description: "", price: "", quantity: "" },
+      3: { description: "", price: "", quantity: "" }
+    }
   });
 
   const [errorCheck, setErrorCheck] = useState(false);

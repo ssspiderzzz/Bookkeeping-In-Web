@@ -11,6 +11,8 @@
 }
 
 .dropdown-content {
+  border: solid 2px;
+  border-color: black;
   border-radius: 5px;
   padding: 1px;
   display: none;

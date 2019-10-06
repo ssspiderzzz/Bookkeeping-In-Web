@@ -19,6 +19,20 @@ a {
   text-decoration: none;
 }
 
+table {
+  width: 100%;
+  overflow-wrap: break-word;
+  vertical-align: middle;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+  width: 25%;
+}
+
 td input,
 th input {
   width: 90%;

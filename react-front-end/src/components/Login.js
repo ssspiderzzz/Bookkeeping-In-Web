@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import MuiThemeProvider from "@material-ui/core/MuiThemeProvider";
-import RaisedButton from "@material-ui/core/RaisedButton";
-import TextField from "@material-ui/core/TextField";
 
 export default function Login(props) {
   const [state, setState] = useState({
@@ -9,33 +6,29 @@ export default function Login(props) {
     password: ""
   });
 
-  function handleClick() {}
+  function handleClick() {
+    console.log(state);
+  }
 
   return (
     <React.Fragment>
       <div>
-        <MuiThemeProvider>
-          <div>
-            <TextField
-              hintText="Enter your Username"
-              floatingLabelText="Username"
-              onChange={(event, newValue) => setState({ username: newValue })}
-            />
-            <br />
-            <TextField
-              type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              onChange={(event, newValue) => setState({ password: newValue })}
-            />
-            <br />
-            <RaisedButton
-              label="Submit"
-              primary={true}
-              onClick={event => handleClick(event)}
-            />
-          </div>
-        </MuiThemeProvider>
+        <input
+          onChange={event =>
+            setState({ ...state, username: event.target.value })
+          }
+        />
+        <br />
+        <input
+          type="password"
+          onChange={(event, newValue) =>
+            setState({ ...state, password: event.target.value })
+          }
+        />
+        <br />
+        <button type="Submit" onClick={event => handleClick(event)}>
+          Submit
+        </button>
       </div>
     </React.Fragment>
   );

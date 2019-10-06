@@ -41,8 +41,8 @@ export default function App(props) {
             </Link>
             <hr />
             <Route exact path="/" />
-            <Route path="/new" component={NewOrder} />
-            <Route path="/login" component={Login} />
+            <Route exact path="/new" component={NewOrder} />
+            <Route exact path="/login" component={Login} />
           </div>
         </Router>
 

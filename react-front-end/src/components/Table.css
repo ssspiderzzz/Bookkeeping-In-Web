@@ -78,21 +78,6 @@ tbody tr:nth-child(even) {
   background: #0000cd;
 }
 
-#edit_button,
-#delete_button {
-  height: 40px;
-  margin-right: 10px;
-  outline: none;
-}
-
-#edit_text,
-#delete_text {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  display: inline;
-  margin-right: 10px;
-}
-
 #delete_message {
   color: red;
   margin-right: 10px;

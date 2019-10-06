@@ -12,12 +12,12 @@ export default function DropdownList(props) {
   ];
 
   return (
-    <div class="dropdown">
-      <img alt="dropdown_icon" src={dropdown_icon} class="dropbtn"></img>
-      <div class="dropdown-content">
-        {user_setting.map(status => {
+    <div className="dropdown">
+      <img alt="dropdown_icon" src={dropdown_icon} className="dropbtn"></img>
+      <div className="dropdown-content">
+        {user_setting.map((status, index) => {
           return (
-            <React.Fragment>
+            <React.Fragment key={index}>
               <input
                 type="button"
                 onClick={event =>

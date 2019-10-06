@@ -1,0 +1,20 @@
+#add_button,
+#check_button,
+#back_button,
+#edit_button,
+#delete_button {
+  height: 40px;
+  margin-right: 10px;
+  outline: none;
+}
+
+#add_text,
+#check_text,
+#back_text,
+#edit_text,
+#delete_text {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: inline;
+  margin-right: 10px;
+}

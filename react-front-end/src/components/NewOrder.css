@@ -74,18 +74,3 @@ tbody tr:nth-child(even) {
 ::-webkit-scrollbar-thumb:hover {
   background: #0000cd;
 }
-
-#add_button,
-#check_button {
-  height: 40px;
-  margin-right: 10px;
-  outline: none;
-}
-
-#add_text,
-#check_text {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  display: inline;
-  margin-right: 10px;
-}

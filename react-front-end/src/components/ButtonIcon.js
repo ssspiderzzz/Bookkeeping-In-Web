@@ -4,6 +4,7 @@ import check_icon from "./images/check-64.png";
 import back_icon from "./images/back-64.png";
 import edit_icon from "./images/edit-64.png";
 import delete_icon from "./images/delete-40.png";
+import "./ButtonIcon.css";
 
 export default function ButtonIcon(props) {
   const text_id = `${props.icon_type}_text`;

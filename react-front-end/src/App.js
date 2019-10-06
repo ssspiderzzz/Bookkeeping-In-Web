@@ -5,6 +5,7 @@ import _ from "lodash";
 import Navbar from "./components/Navbar";
 import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
+import Login from "./components/Login";
 import "./App.css";
 
 export default function App(props) {
@@ -35,9 +36,13 @@ export default function App(props) {
             <Link to="/new">
               <span id="new_button">New Order</span>
             </Link>
+            <Link to="/login">
+              <span id="new_button">Login</span>
+            </Link>
             <hr />
             <Route exact path="/" />
             <Route path="/new" component={NewOrder} />
+            <Route path="/login" component={Login} />
           </div>
         </Router>
 

@@ -1,17 +1,13 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
+const morgan = require("morgan");
 const PORT = 8080;
 const { Pool } = require("pg");
 require("dotenv").config();
+const dbParams = require("./db_config");
 
-const db = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
+const db = new Pool(dbParams);
 
 db.connect((error, client) => {
   console.log(process.env.DB_HOST);
@@ -23,6 +19,7 @@ db.connect((error, client) => {
 });
 
 // Express Configuration
+App.use(morgan("dev"));
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));

@@ -11,7 +11,7 @@ import ButtonIcon from "./ButtonIcon";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
-    name: "",
+    customer_name: "",
     order_status: "",
     address: "",
     phone_number: "",
@@ -48,7 +48,7 @@ export default function NewOrder(props) {
   }
 
   function handleSubmit() {
-    if (newOrder.name && newOrder.order_status) {
+    if (newOrder.customer_name && newOrder.order_status) {
       axios
         .post("/api/new", { newOrder: newOrder })
         .then(() => {
@@ -79,8 +79,10 @@ export default function NewOrder(props) {
               <th>Customer</th>
               <th>
                 <input
-                  onChange={event => onGeneralInfoChange(event, "name")}
-                  value={newOrder.name}
+                  onChange={event =>
+                    onGeneralInfoChange(event, "customer_name")
+                  }
+                  value={newOrder.customer_name}
                 ></input>
               </th>
               <th>Order Status</th>

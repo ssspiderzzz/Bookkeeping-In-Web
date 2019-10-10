@@ -28,8 +28,9 @@ App.get("/api/data", (req, res) => {
   db.query(
     `
     SELECT * 
-    FROM orders JOIN users ON user_id = users.id
-    `
+    FROM orders WHERE user_id = $1
+    `,
+    [1]
   )
     .then(data1 => {
       db.query(`SELECT * FROM items`).then(data2 => {
@@ -49,7 +50,7 @@ App.post("/api/new", (req, res) => {
     RETURNING id;
     `,
     [
-      req.body.newOrder.name,
+      req.body.newOrder.customer_name,
       0,
       req.body.newOrder.address,
       req.body.newOrder.order_status,
@@ -105,66 +106,56 @@ App.post("/api/edit", (req, res) => {
   console.log(JSON.stringify(req.body, null, 2));
   db.query(
     `
-    UPDATE customers
-    SET name = $1, phone_number = $2, address = $3
-    WHERE id = $4;
+    UPDATE orders
+    SET customer_name = $1, phone_number = $2, address = $3,
+    order_status = $4, note = $5
+    WHERE id = $6;
     `,
     [
-      req.body.editOrder.name,
+      req.body.editOrder.customer_name,
       req.body.editOrder.phone_number,
       req.body.editOrder.address,
-      req.body.editOrder.customer_id
+      req.body.editOrder.order_status,
+      req.body.editOrder.note,
+      req.body.editOrder.order_id
     ]
   )
     .then(data1 => {
-      db.query(
-        `
-    UPDATE orders
-    SET order_status = $1, note = $2
-    WHERE id = $3;
-    `,
-        [
-          req.body.editOrder.order_status,
-          req.body.editOrder.note,
-          req.body.editOrder.order_id
-        ]
-      ).then(data2 => {
-        for (let item of Object.keys(req.body.editOrder.items)) {
-          if (req.body.editOrder.items[item].id) {
-            db.query(
-              `
+      for (let item of Object.keys(req.body.editOrder.items)) {
+        if (req.body.editOrder.items[item].id) {
+          db.query(
+            `
                   UPDATE items 
                   SET description = $1, price = $2, quantity = $3, sub_total = $4
                   WHERE id = $5;
                   `,
-              [
-                req.body.editOrder.items[item].description,
-                Number(req.body.editOrder.items[item].price),
+            [
+              req.body.editOrder.items[item].description,
+              Number(req.body.editOrder.items[item].price),
+              Number(req.body.editOrder.items[item].quantity),
+              Number(req.body.editOrder.items[item].price) *
                 Number(req.body.editOrder.items[item].quantity),
-                Number(req.body.editOrder.items[item].price) *
-                  Number(req.body.editOrder.items[item].quantity),
-                req.body.editOrder.items[item].id
-              ]
-            );
-          } else if (req.body.editOrder.items[item].description) {
-            db.query(
-              `
+              req.body.editOrder.items[item].id
+            ]
+          );
+        } else if (req.body.editOrder.items[item].description) {
+          db.query(
+            `
                   INSERT INTO items (description, price, quantity, sub_total, order_id)
                   VALUES ($1, $2, $3, $4, $5)
                   `,
-              [
-                req.body.editOrder.items[item].description,
-                Number(req.body.editOrder.items[item].price),
+            [
+              req.body.editOrder.items[item].description,
+              Number(req.body.editOrder.items[item].price),
+              Number(req.body.editOrder.items[item].quantity),
+              Number(req.body.editOrder.items[item].price) *
                 Number(req.body.editOrder.items[item].quantity),
-                Number(req.body.editOrder.items[item].price) *
-                  Number(req.body.editOrder.items[item].quantity),
-                req.body.editOrder.order_id
-              ]
-            );
-          }
+              req.body.editOrder.order_id
+            ]
+          );
         }
-        res.json("Edit succeed!");
-      });
+      }
+      res.json("Edit succeed!");
     })
     .catch(err => console.log(err));
 });

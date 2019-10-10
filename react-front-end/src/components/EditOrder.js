@@ -15,7 +15,7 @@ export default function EditOrder(props) {
     order_id: props.order.id,
     customer_id: props.order.customer_id,
     date_create: props.order.date_create,
-    name: props.order.name,
+    customer_name: props.order.customer_name,
     order_status: props.order.order_status,
     address: "",
     phone_number: "",
@@ -48,7 +48,7 @@ export default function EditOrder(props) {
   }
 
   function handleSubmit() {
-    if (editOrder.name && editOrder.order_status) {
+    if (editOrder.customer_name && editOrder.order_status) {
       axios
         .post("/api/edit/", { editOrder: editOrder })
         .then(() => {
@@ -84,8 +84,10 @@ export default function EditOrder(props) {
               <th>Customer</th>
               <th>
                 <input
-                  onChange={event => onGeneralInfoChange(event, "name")}
-                  value={editOrder.name}
+                  onChange={event =>
+                    onGeneralInfoChange(event, "customer_name")
+                  }
+                  value={editOrder.customer_name}
                 ></input>
               </th>
               <th>Order Status</th>

@@ -39,7 +39,7 @@ export default function EachOrder(props) {
             </tr>
             <tr id="customer_status">
               <th>Customer</th>
-              <th>{props.order.name}</th>
+              <th>{props.order.customer_name}</th>
               <th>Order Status</th>
               <th>{props.order.order_status}</th>
             </tr>

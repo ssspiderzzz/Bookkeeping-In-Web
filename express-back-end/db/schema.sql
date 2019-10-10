@@ -13,7 +13,7 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   customer_name VARCHAR(255) DEFAULT '',
   phone_number VARCHAR(255) DEFAULT '',
-  address VARCHAR(255) DEFAULT ''
+  address VARCHAR(255) DEFAULT '',
   order_status VARCHAR(255),
   date_create TIMESTAMP DEFAULT NOW(),
   date_end TIMESTAMP,

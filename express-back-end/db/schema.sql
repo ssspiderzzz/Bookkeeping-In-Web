@@ -1,21 +1,24 @@
-DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
 
-CREATE TABLE customers (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) DEFAULT '',
-  phone_number VARCHAR(255) DEFAULT '',
-  address VARCHAR(255) DEFAULT ''
+  username VARCHAR(255) DEFAULT '',
+  password VARCHAR(255) DEFAULT '',
+  setting VARCHAR(255) DEFAULT ''
 );
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
+  customer_name VARCHAR(255) DEFAULT '',
+  phone_number VARCHAR(255) DEFAULT '',
+  address VARCHAR(255) DEFAULT ''
   order_status VARCHAR(255),
   date_create TIMESTAMP DEFAULT NOW(),
   date_end TIMESTAMP,
   note VARCHAR(255),
-  customer_id INT REFERENCES customers(id)
+  user_id INT REFERENCES users(id)
 );
 
 CREATE TABLE items (

@@ -28,7 +28,7 @@ App.get("/api/data", (req, res) => {
   db.query(
     `
     SELECT * 
-    FROM orders JOIN customers ON customer_id = customers.id
+    FROM orders JOIN users ON user_id = users.id
     `
   )
     .then(data1 => {
@@ -43,47 +43,43 @@ App.post("/api/new", (req, res) => {
   console.log(JSON.stringify(req.body, null, 2));
   db.query(
     `
-    INSERT INTO customers (name, phone_number, address)
-    VALUES ($1, $2, $3)
+    INSERT INTO 
+    orders (customer_name, phone_number, address, order_status, note, user_id)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING id;
     `,
-    [req.body.newOrder.name, 0, req.body.newOrder.address]
+    [
+      req.body.newOrder.name,
+      0,
+      req.body.newOrder.address,
+      req.body.newOrder.order_status,
+      req.body.newOrder.note,
+      1
+    ]
   )
-    .then(data1 => {
-      db.query(
-        `
-        INSERT INTO orders (order_status, note, customer_id)
-        VALUES ($1, $2, $3)
-        RETURNING id;
-        `,
-        [
-          req.body.newOrder.order_status,
-          req.body.newOrder.note,
-          data1.rows[0].id
-        ]
-      ).then(data2 => {
-        for (let item of Object.keys(req.body.newOrder.items)) {
-          if (req.body.newOrder.items[item].description) {
-            console.log(req.body.newOrder.items[item]);
-            db.query(
-              `
+    .then(data => {
+      for (let item of Object.keys(req.body.newOrder.items)) {
+        if (req.body.newOrder.items[item].description) {
+          console.log(req.body.newOrder.items[item]);
+          db.query(
+            `
             INSERT INTO items (description, price, quantity, sub_total, order_id)
             VALUES ($1, $2, $3, $4, $5)
             `,
-              [
-                req.body.newOrder.items[item].description,
-                Number(req.body.newOrder.items[item].price),
+            [
+              req.body.newOrder.items[item].description,
+              Number(req.body.newOrder.items[item].price),
+              Number(req.body.newOrder.items[item].quantity),
+              Number(req.body.newOrder.items[item].price) *
                 Number(req.body.newOrder.items[item].quantity),
-                Number(req.body.newOrder.items[item].price) *
-                  Number(req.body.newOrder.items[item].quantity),
-                data2.rows[0].id
-              ]
-            );
-          }
+              data.rows[0].id
+            ]
+          );
         }
-        res.redirect("/");
-      });
+      }
+      res.redirect("/");
     })
+
     .catch(err => console.log(err));
 });
 

@@ -34,6 +34,16 @@ Promise.resolve(read(path.resolve(__dirname, `db/schema.sql`)))
   .then(schema => {
     db.query(schema).then(() => {
       console.log(`Database has been reset successfully!`);
+    });
+  })
+  .then(() => {
+    db.query(
+      `
+    INSERT INTO users (username, password, setting) 
+    VALUES ("spider", "123", "")
+    `
+    ).then(() => {
+      console.log(`Create fake user!`);
       db.end();
       process.exit(0);
     });

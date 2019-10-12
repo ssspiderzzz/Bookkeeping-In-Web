@@ -97,7 +97,7 @@ App.post("/api/delete/:id", (req, res) => {
     DELETE FROM orders WHERE orders.id = $1;
     `,
         [req.params.id]
-      ).then(res.json(`Order had been deleted!`));
+      ).then(res.json(`Order ${req.params.id} has been deleted!`));
     })
     .catch(err => console.log(err));
 });

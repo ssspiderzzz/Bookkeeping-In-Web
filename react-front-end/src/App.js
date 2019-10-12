@@ -36,21 +36,30 @@ export default function App(props) {
             <Link to="/new">
               <span id="new_button">New Order</span>
             </Link>
+            <Link
+              to="/lists"
+              orders={state.orders}
+              items={state.items}
+              setRefresh={setRefresh}
+            >
+              <span id="new_button">Lists</span>
+            </Link>
             <Link to="/login">
               <span id="new_button">Login</span>
             </Link>
             <hr />
             <Route exact path="/" />
+            <Route exact path="/lists" component={Table} />
             <Route exact path="/new" component={NewOrder} />
             <Route exact path="/login" component={Login} />
           </div>
-        </Router>
 
-        <Table
-          orders={state.orders}
-          items={state.items}
-          setRefresh={setRefresh}
-        ></Table>
+          {/* <Table
+            orders={state.orders}
+            items={state.items}
+            setRefresh={setRefresh}
+          ></Table> */}
+        </Router>
       </div>
     </div>
   );

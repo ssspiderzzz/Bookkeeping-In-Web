@@ -27,8 +27,14 @@ export default function Login(props) {
         />
         <br />
         <button type="Submit" onClick={event => handleClick(event)}>
-          Submit
+          Sign In
         </button>
+        <p>--- or ---</p>
+        <div
+          id="google-sign-in"
+          class="g-signin2"
+          data-onsuccess="onSignIn"
+        ></div>
       </div>
     </React.Fragment>
   );

@@ -58,12 +58,6 @@ export default function App(props) {
             <Route exact path="/new" component={NewOrder} />
             <Route exact path="/login" component={Login} />
           </div>
-
-          {/* <Table
-            orders={state.orders}
-            items={state.items}
-            setRefresh={setRefresh}
-          ></Table> */}
         </Router>
       </div>
     </div>

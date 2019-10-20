@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import GoogleLogin from "react-google-login";
+import "./Login.css";
 
 export default function Login(props) {
   const [state, setState] = useState({
@@ -8,6 +10,10 @@ export default function Login(props) {
 
   function handleClick() {
     console.log(state);
+  }
+
+  function responseGoogle(response) {
+    console.log(response);
   }
 
   return (
@@ -30,11 +36,13 @@ export default function Login(props) {
           Sign In
         </button>
         <p>--- or ---</p>
-        <div
-          id="google-sign-in"
-          class="g-signin2"
-          data-onsuccess="onSignIn"
-        ></div>
+        <GoogleLogin
+          clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+          buttonText="Sign in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
       </div>
     </React.Fragment>
   );

@@ -39,6 +39,8 @@ export default function Login(props) {
         <GoogleLogin
           clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
           buttonText="Sign in with Google"
+          uxMode="redirect"
+          redirectUri="http://localhost:3000"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}

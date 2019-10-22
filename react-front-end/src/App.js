@@ -43,7 +43,7 @@ export default function App(props) {
               <span id="new_button">Login</span>
             </Link>
             <hr />
-            <Route exact path="/" />
+            <Route exact path="/" render={() => <Login />} />
             <Route
               exact
               path="/lists"

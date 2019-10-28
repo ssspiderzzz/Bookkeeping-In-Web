@@ -1,5 +1,6 @@
 const Express = require("express");
 const App = Express();
+const bcrypt = require("bcrypt");
 const BodyParser = require("body-parser");
 const morgan = require("morgan");
 const PORT = 8080;

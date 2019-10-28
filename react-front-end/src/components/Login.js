@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 import "./Login.css";
 
 export default function Login(props) {
@@ -8,16 +8,31 @@ export default function Login(props) {
     password: ""
   });
 
+  const [user, setUser] = useState("");
+
   function handleClick() {
     console.log(state);
   }
 
   function responseGoogle(response) {
-    console.log(response);
+    const res = JSON.stringify(response);
+    setTimeout(() => {
+      console.log("google response:" + res);
+      if (res) console.log(JSON.stringify(response.profileObj));
+    }, 3000);
+  }
+
+  function onSuccess(response) {
+    setUser(response.profileObj.email);
+  }
+
+  function onLogout(response) {
+    setUser(response);
   }
 
   return (
     <React.Fragment>
+      {user && <div>Welcome, {user}!</div>}
       <div>
         <input
           onChange={event =>
@@ -38,12 +53,20 @@ export default function Login(props) {
         <p>--- or ---</p>
         <GoogleLogin
           clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+          scope="profile"
           buttonText="Sign in with Google"
           uxMode="redirect"
           redirectUri="http://localhost:3000"
-          onSuccess={responseGoogle}
+          onSuccess={onSuccess}
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
+        />
+        <br />
+        <br />
+        <GoogleLogout
+          clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+          buttonText="Logout"
+          onLogoutSuccess={onLogout}
         />
       </div>
     </React.Fragment>

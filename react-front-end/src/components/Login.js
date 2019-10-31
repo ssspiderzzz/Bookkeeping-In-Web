@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import "./Login.css";
 
@@ -24,6 +25,8 @@ export default function Login(props) {
 
   function onSuccess(response) {
     setUser(response.profileObj.email);
+    console.log("Signed in as " + response.getBasicProfile().getName());
+    Cookies.set(response.getBasicProfile().getName());
   }
 
   function onLogout(response) {
@@ -55,7 +58,7 @@ export default function Login(props) {
           clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
           scope="profile"
           buttonText="Sign in with Google"
-          uxMode="redirect"
+          uxMode="popup"
           redirectUri="http://localhost:3000"
           onSuccess={onSuccess}
           onFailure={responseGoogle}

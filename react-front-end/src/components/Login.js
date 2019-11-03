@@ -1,5 +1,6 @@
 import React from "react";
 import Cookies from "js-cookie";
+import Button from "@material-ui/core/Button";
 import { GoogleLogin } from "react-google-login";
 import "./Login.css";
 
@@ -12,6 +13,12 @@ export default function Login(props) {
 
   function onFailure(response) {
     console.log("Error Login Fail: " + response);
+  }
+
+  function guestLogin() {
+    Cookies.set("user", "Guest", { expires: 1 });
+    Cookies.set("email", "guest-login", { expires: 1 });
+    props.setAuthRefresh(true);
   }
 
   return (
@@ -29,6 +36,12 @@ export default function Login(props) {
             theme={"dark"}
             cookiePolicy={"single_host_origin"}
           />
+          <br />
+          <p>or</p>
+          <br />
+          <Button onClick={guestLogin} variant="contained" color="primary">
+            Guest Login
+          </Button>
         </div>
       )}
     </React.Fragment>

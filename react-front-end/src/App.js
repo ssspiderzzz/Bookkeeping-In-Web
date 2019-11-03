@@ -43,7 +43,7 @@ export default function App(props) {
         auth={auth}
         setAuth={setAuth}
         setAuthRefresh={setAuthRefresh}
-      ></MenuAppBar>
+      />
       <div id="main">
         <Router>
           <div id="nav_button">
@@ -84,15 +84,21 @@ export default function App(props) {
             <Route
               exact
               path="/lists"
-              render={() => (
-                <Table
-                  orders={state.orders}
-                  items={state.items}
-                  setRefresh={setRefresh}
-                ></Table>
-              )}
+              render={() =>
+                auth.email && (
+                  <Table
+                    orders={state.orders}
+                    items={state.items}
+                    setRefresh={setRefresh}
+                  />
+                )
+              }
             />
-            <Route exact path="/new" component={NewOrder} />
+            <Route
+              exact
+              path="/new"
+              render={() => auth.email && <NewOrder auth={auth} />}
+            />
           </div>
         </Router>
       </div>

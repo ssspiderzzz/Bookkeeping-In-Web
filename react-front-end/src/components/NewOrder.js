@@ -11,6 +11,7 @@ import ButtonIcon from "./ButtonIcon";
 
 export default function NewOrder(props) {
   const [newOrder, dispatch] = useReducer(reducer, {
+    email: props.auth.email,
     customer_name: "",
     order_status: "",
     address: "",

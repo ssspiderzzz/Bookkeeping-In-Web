@@ -5,55 +5,40 @@ import "./Login.css";
 
 export default function Login(props) {
   const [state, setState] = useState({
-    username: "",
-    password: ""
+    user: undefined,
+    email: undefined
   });
 
-  const [user, setUser] = useState("");
+  const [refresher, setRefresher] = useState(false);
 
-  function handleClick() {
-    console.log(state);
-  }
-
-  function responseGoogle(response) {
-    const res = JSON.stringify(response);
-    setTimeout(() => {
-      console.log("google response:" + res);
-      if (res) console.log(JSON.stringify(response.profileObj));
-    }, 3000);
-  }
+  useEffect(() => {
+    setState({
+      user: Cookies.get("user"),
+      email: Cookies.get("email")
+    });
+    setRefresher(false);
+  }, [refresher]);
 
   function onSuccess(response) {
-    setUser(response.profileObj.email);
-    console.log("Signed in as " + response.getBasicProfile().getName());
-    Cookies.set(response.getBasicProfile().getName());
+    Cookies.set("user", response.profileObj.givenName, { expires: 7 });
+    Cookies.set("email", response.profileObj.email, { expires: 7 });
+    setRefresher(true);
   }
 
-  function onLogout(response) {
-    setUser(response);
+  function onFailure(response) {
+    console.log("Error Login Fail: " + response);
+  }
+
+  function onLogout() {
+    Cookies.remove("email");
+    Cookies.remove("user");
+    setRefresher(true);
   }
 
   return (
     <React.Fragment>
-      {user && <div>Welcome, {user}!</div>}
+      {state.user && <div>Welcome, {state.user}!</div>}
       <div>
-        <input
-          onChange={event =>
-            setState({ ...state, username: event.target.value })
-          }
-        />
-        <br />
-        <input
-          type="password"
-          onChange={(event, newValue) =>
-            setState({ ...state, password: event.target.value })
-          }
-        />
-        <br />
-        <button type="Submit" onClick={event => handleClick(event)}>
-          Sign In
-        </button>
-        <p>--- or ---</p>
         <GoogleLogin
           clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
           scope="profile"
@@ -61,7 +46,7 @@ export default function Login(props) {
           uxMode="popup"
           redirectUri="http://localhost:3000"
           onSuccess={onSuccess}
-          onFailure={responseGoogle}
+          onFailure={onFailure}
           cookiePolicy={"single_host_origin"}
         />
         <br />

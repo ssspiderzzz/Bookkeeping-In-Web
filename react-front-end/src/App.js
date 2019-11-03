@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Home, PostAdd, LibraryBooks } from "@material-ui/icons";
 import axios from "axios";
 import _ from "lodash";
-import Navbar from "./components/Navbar";
+import MenuAppBar from "./components/MenuAppBar";
 import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
 import Login from "./components/Login";
@@ -39,11 +39,11 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <Navbar
+      <MenuAppBar
         auth={auth}
         setAuth={setAuth}
         setAuthRefresh={setAuthRefresh}
-      ></Navbar>
+      ></MenuAppBar>
       <div id="main">
         <Router>
           <div id="nav_button">

@@ -36,12 +36,12 @@ Promise.resolve(read(path.resolve(__dirname, `db/schema.sql`)))
       console.log(`Database has been reset successfully!`);
       db.query(
         `
-      INSERT INTO users (username, password, setting) 
-      VALUES ($1, $2, $3)
+      INSERT INTO users (email, setting) 
+      VALUES ($1, $2)
       `,
-        ["spider", "123", "none"]
+        ["guest", "none"]
       ).then(() => {
-        console.log(`Create fake user!`);
+        console.log(`Create guest user!`);
         db.end();
         process.exit(0);
       });

@@ -16,19 +16,21 @@ export default function Login(props) {
 
   return (
     <React.Fragment>
-      <div>
-        <GoogleLogin
-          clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
-          scope="profile"
-          buttonText="Sign in with Google"
-          uxMode="popup"
-          redirectUri="http://localhost:3000"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          theme={"dark"}
-          cookiePolicy={"single_host_origin"}
-        />
-      </div>
+      {!props.auth.user && !props.auth.email && (
+        <div>
+          <GoogleLogin
+            clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+            scope="profile"
+            buttonText="Sign in with Google"
+            uxMode="popup"
+            redirectUri="http://localhost:3000"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            theme={"dark"}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+      )}
     </React.Fragment>
   );
 }

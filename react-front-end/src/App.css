@@ -8,34 +8,15 @@
   margin: 10px;
 }
 
-#home_button,
-#new_button {
-  border: 3px solid;
-  border-radius: 10px;
-  padding: 3px;
-  margin: 10px;
+#HomeIcon,
+#PostAddIcon,
+#LibraryBooksIcon {
+  margin-right: 5px;
 }
 
-#home_button:hover {
-  color: white;
-  background: rgb(69, 139, 215, 0.4);
-}
-
-#home_button {
-  color: black;
-  border-color: rgb(69, 139, 215);
-  background-color: rgb(69, 139, 215, 0.1);
-  transition: all ease-in-out 0.3s;
-}
-
-#new_button:hover {
-  color: white;
-  background: rgb(44, 203, 155, 0.5);
-}
-
-#new_button {
-  color: black;
-  border-color: rgb(44, 203, 155);
-  background-color: rgb(44, 203, 155, 0.1);
-  transition: all ease-in-out 0.3s;
+#HomeButton,
+#PostAddButton,
+#LibraryBooksButton {
+  margin-left: 1vw;
+  margin-right: 1vw;
 }

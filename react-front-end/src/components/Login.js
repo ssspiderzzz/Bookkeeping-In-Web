@@ -9,20 +9,20 @@ export default function Login(props) {
     email: undefined
   });
 
-  const [refresher, setRefresher] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     setState({
       user: Cookies.get("user"),
       email: Cookies.get("email")
     });
-    setRefresher(false);
-  }, [refresher]);
+    setRefresh(false);
+  }, [refresh]);
 
   function onSuccess(response) {
     Cookies.set("user", response.profileObj.givenName, { expires: 7 });
     Cookies.set("email", response.profileObj.email, { expires: 7 });
-    setRefresher(true);
+    setRefresh(true);
   }
 
   function onFailure(response) {
@@ -32,7 +32,7 @@ export default function Login(props) {
   function onLogout() {
     Cookies.remove("email");
     Cookies.remove("user");
-    setRefresher(true);
+    setRefresh(true);
   }
 
   return (
@@ -47,6 +47,7 @@ export default function Login(props) {
           redirectUri="http://localhost:3000"
           onSuccess={onSuccess}
           onFailure={onFailure}
+          theme={"dark"}
           cookiePolicy={"single_host_origin"}
         />
         <br />
@@ -55,6 +56,7 @@ export default function Login(props) {
           clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
           buttonText="Logout"
           onLogoutSuccess={onLogout}
+          theme={"dark"}
         />
       </div>
     </React.Fragment>

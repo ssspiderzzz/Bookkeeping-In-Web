@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,6 +9,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Cookies from "js-cookie";
+import { GoogleLogout } from "react-google-login";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,15 +23,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const classes = useStyles();
-  const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  useEffect(() => {
-    setAuth(Cookies.get("user"));
-  }, []);
+  function onLogout() {
+    Cookies.remove("email");
+    Cookies.remove("user");
+    props.setAuthRefresh(true);
+  }
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget);
@@ -52,8 +54,17 @@ export default function MenuAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}></Typography>
-          {auth && (
+          {props.auth.user && (
+            <Typography variant="h6" className={classes.title}>
+              Welcome, {props.auth.user}!
+            </Typography>
+          )}
+          {!props.auth.email && (
+            <Typography variant="h6" className={classes.title}>
+              Please sign in with google account first.
+            </Typography>
+          )}
+          {props.auth.email && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -62,6 +73,9 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
               >
+                <Typography variant="h6" className={classes.title}>
+                  {props.auth.email}
+                </Typography>
                 <AccountCircle />
               </IconButton>
               <Menu
@@ -80,7 +94,14 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Account Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <GoogleLogout
+                    clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+                    buttonText="Logout"
+                    onLogoutSuccess={onLogout}
+                    theme={"dark"}
+                  />
+                </MenuItem>
               </Menu>
             </div>
           )}

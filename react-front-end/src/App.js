@@ -9,10 +9,21 @@ import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
 import Login from "./components/Login";
 import "./App.css";
+import Cookies from "js-cookie";
 
 export default function App(props) {
   const [state, setState] = useState("");
+  const [auth, setAuth] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [authRefresh, setAuthRefresh] = useState(false);
+
+  useEffect(() => {
+    setAuth({
+      user: Cookies.get("user"),
+      email: Cookies.get("email")
+    });
+    setAuthRefresh(false);
+  }, [authRefresh]);
 
   useEffect(() => {
     axios.get("/api/data").then(res => {
@@ -28,7 +39,11 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <Navbar></Navbar>
+      <Navbar
+        auth={auth}
+        setAuth={setAuth}
+        setAuthRefresh={setAuthRefresh}
+      ></Navbar>
       <div id="main">
         <Router>
           <div id="nav_button">
@@ -55,7 +70,17 @@ export default function App(props) {
               </Button>
             </Link>
             <hr />
-            <Route exact path="/" render={() => <Login />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Login
+                  auth={auth}
+                  setAuth={setAuth}
+                  setAuthRefresh={setAuthRefresh}
+                />
+              )}
+            />
             <Route
               exact
               path="/lists"

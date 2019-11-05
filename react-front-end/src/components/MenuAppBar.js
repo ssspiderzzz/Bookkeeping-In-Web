@@ -32,6 +32,7 @@ export default function MenuAppBar(props) {
     Cookies.remove("email");
     Cookies.remove("user");
     props.setAuthRefresh(true);
+    setAnchorEl(null);
   }
 
   function handleMenu(event) {
@@ -94,14 +95,20 @@ export default function MenuAppBar(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Account Settings</MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <GoogleLogout
-                    clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
-                    buttonText="Logout"
-                    onLogoutSuccess={onLogout}
-                    theme={"dark"}
-                  />
-                </MenuItem>
+                {props.auth.email !== "guest-login" && (
+                  <MenuItem>
+                    <GoogleLogout
+                      id="googleLogout"
+                      clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+                      buttonText="Logout"
+                      onLogoutSuccess={onLogout}
+                      theme={"dark"}
+                    />
+                  </MenuItem>
+                )}
+                {props.auth.email === "guest-login" && (
+                  <MenuItem onClick={onLogout}>Logout</MenuItem>
+                )}
               </Menu>
             </div>
           )}

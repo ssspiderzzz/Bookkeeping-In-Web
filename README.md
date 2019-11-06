@@ -4,14 +4,8 @@ A web based online bookkeeping application which allows users to create, edit an
 
 ## Running the projects
 
-run npm install first
+Step 1: run `npm install` to install the dependencies.
 
-```bash
-npm install
-```
+Step 2: run `npm start` to run the app after npm install has completed.
 
-run npm start to run the app after npm install has completed
-
-```bash
-npm start
-```
+Step 3: go to `localhost:3000` in your browser.

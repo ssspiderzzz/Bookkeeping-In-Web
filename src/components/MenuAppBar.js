@@ -33,15 +33,17 @@ export default function MenuAppBar(props) {
     Cookies.remove("email");
     Cookies.remove("user");
     props.setAuthRefresh(true);
-    signOut();
+    googleSignOut();
     setAnchorEl(null);
   }
 
-  function signOut() {
-    var auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function() {
-      console.log("User signed out.");
-    });
+  function googleSignOut() {
+    if (window.gapi.auth2) {
+      var auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
+    }
   }
 
   function handleMenu(event) {

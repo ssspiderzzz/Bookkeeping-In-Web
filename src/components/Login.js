@@ -25,6 +25,7 @@ export default function Login(props) {
     <React.Fragment>
       {!props.auth.user && !props.auth.email && (
         <div>
+          <br />
           <GoogleLogin
             clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
             scope="profile"
@@ -38,7 +39,6 @@ export default function Login(props) {
           />
           <br />
           <p>or</p>
-          <br />
           <Button onClick={guestLogin} variant="contained" color="primary">
             Guest Login
           </Button>

@@ -10,6 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Cookies from "js-cookie";
 import { GoogleLogout } from "react-google-login";
+import "./MenuAppBar.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,7 +33,15 @@ export default function MenuAppBar(props) {
     Cookies.remove("email");
     Cookies.remove("user");
     props.setAuthRefresh(true);
+    signOut();
     setAnchorEl(null);
+  }
+
+  function signOut() {
+    var auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+      console.log("User signed out.");
+    });
   }
 
   function handleMenu(event) {
@@ -102,13 +111,12 @@ export default function MenuAppBar(props) {
                       clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
                       buttonText="Logout"
                       onLogoutSuccess={onLogout}
-                      theme={"dark"}
+                      icon={false}
                     />
                   </MenuItem>
                 )}
-                {props.auth.email === "guest-login" && (
-                  <MenuItem onClick={onLogout}>Logout</MenuItem>
-                )}
+
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
               </Menu>
             </div>
           )}

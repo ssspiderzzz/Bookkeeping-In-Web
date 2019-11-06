@@ -3,7 +3,20 @@
   margin-right: auto;
 }
 
-body {
-  background: url("./images/background/bg.jpg") no-repeat center center fixed;
-  background-size: cover;
+#background {
+  filter: blur(1px);
+  height: -webkit-fill-available;
+  height: -moz-fill-available;
+  height: -ms-fill-available;
+  height: -o-fill-available;
+  width: -webkit-fill-available;
+  width: -moz-fill-available;
+  width: -ms-fill-available;
+  width: -o-fill-available;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  opacity: 0.8;
 }

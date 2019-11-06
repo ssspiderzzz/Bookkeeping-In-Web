@@ -20,3 +20,17 @@
   object-fit: cover;
   opacity: 0.8;
 }
+
+#signInContainer {
+  background-color: rgb(255, 255, 255, 0.5);
+  border-radius: 3vw;
+  padding: 4vw;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  transition: all ease-in-out 0.5s;
+}
+
+#signInContainer:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Cookies from "js-cookie";
 import Button from "@material-ui/core/Button";
 import { GoogleLogin } from "react-google-login";
@@ -26,8 +26,7 @@ export default function Login(props) {
     <React.Fragment>
       <img id="background" src={background} alt="background"></img>
       {!props.auth.user && !props.auth.email && (
-        <div>
-          <br />
+        <div id="signInContainer">
           <GoogleLogin
             clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
             scope="profile"
@@ -40,7 +39,7 @@ export default function Login(props) {
             cookiePolicy={"single_host_origin"}
           />
           <br />
-          <p>or</p>
+          <p>OR</p>
           <Button onClick={guestLogin} variant="contained" color="primary">
             Sign in as Guest
           </Button>

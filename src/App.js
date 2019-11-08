@@ -30,8 +30,8 @@ export default function App(props) {
       console.log(res.data.orders.rows);
       console.log(res.data.items.rows);
       setState({
-        orders: _.sortBy(res.data.orders.rows, "id"),
-        items: _.sortBy(res.data.items.rows, "id")
+        orders: _.orderBy(res.data.orders.rows, "id", "desc"),
+        items: _.orderBy(res.data.items.rows, "id")
       });
       setRefresh(false);
     });

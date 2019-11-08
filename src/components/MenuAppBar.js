@@ -72,8 +72,12 @@ export default function MenuAppBar(props) {
             </Typography>
           )}
           {!props.auth.email && (
-            <Typography variant="h6" className={classes.title}>
-              Please sign in with google account first.
+            <Typography
+              style={{ textAlign: "right" }}
+              variant="h6"
+              className={classes.title}
+            >
+              Please Sign In
             </Typography>
           )}
           {props.auth.email && (

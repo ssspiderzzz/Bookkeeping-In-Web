@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { Home, PostAdd, LibraryBooks } from "@material-ui/icons";
-import axios from "axios";
-import _ from "lodash";
+import { fetchAllData } from "./helpers/fetchData";
 import MenuAppBar from "./components/MenuAppBar";
 import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
@@ -26,15 +25,7 @@ export default function App(props) {
   }, [authRefresh]);
 
   useEffect(() => {
-    axios.get("/api/data").then(res => {
-      console.log(res.data.orders.rows);
-      console.log(res.data.items.rows);
-      setState({
-        orders: _.orderBy(res.data.orders.rows, "id", "desc"),
-        items: _.orderBy(res.data.items.rows, "id")
-      });
-      setRefresh(false);
-    });
+    fetchAllData(setState, setRefresh);
   }, [refresh]);
 
   return (

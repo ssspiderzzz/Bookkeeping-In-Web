@@ -15,6 +15,8 @@ export function fetchAllData(setState, setRefresh) {
 
 export function userCheck() {
   axios.get("/api/userCheck").then(id => {
-    console.log(id);
+    if (id) {
+      axios.get("/api/data").then(res => {});
+    }
   });
 }

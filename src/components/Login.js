@@ -23,8 +23,6 @@ export default function Login(props) {
     Cookies.set("email", "guest-login", { expires: 1 });
     props.setAuthRefresh(true);
     userCheck();
-    console.log(Cookies.get("user"));
-    console.log(Cookies.get("email"));
   }
 
   return (

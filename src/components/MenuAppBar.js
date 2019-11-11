@@ -35,6 +35,7 @@ export default function MenuAppBar(props) {
     props.setAuthRefresh(true);
     googleSignOut();
     setAnchorEl(null);
+    window.location.href = "/";
   }
 
   function googleSignOut() {

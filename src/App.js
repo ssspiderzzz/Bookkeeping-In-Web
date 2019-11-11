@@ -13,28 +13,19 @@ import Cookies from "js-cookie";
 export default function App(props) {
   const [state, setState] = useState("");
   const [auth, setAuth] = useState(false);
-  const [refresh, setRefresh] = useState(false);
-  const [authRefresh, setAuthRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     setAuth({
       user: Cookies.get("user"),
       email: Cookies.get("email")
     });
-    setAuthRefresh(false);
-  }, [authRefresh]);
-
-  useEffect(() => {
-    fetchAllData(setState, setRefresh);
+    fetchAllData(setState);
   }, [refresh]);
 
   return (
     <div className="App">
-      <MenuAppBar
-        auth={auth}
-        setAuth={setAuth}
-        setAuthRefresh={setAuthRefresh}
-      />
+      <MenuAppBar auth={auth} setRefresh={setRefresh} />
       <div id="main">
         <Router>
           <div id="nav_button">
@@ -64,13 +55,7 @@ export default function App(props) {
             <Route
               exact
               path="/"
-              render={() => (
-                <Login
-                  auth={auth}
-                  setAuth={setAuth}
-                  setAuthRefresh={setAuthRefresh}
-                />
-              )}
+              render={() => <Login auth={auth} setRefresh={setRefresh} />}
             />
             <Route
               exact

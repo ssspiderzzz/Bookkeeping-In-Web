@@ -32,7 +32,7 @@ export default function MenuAppBar(props) {
   function onLogout() {
     Cookies.remove("email");
     Cookies.remove("user");
-    props.setAuthRefresh(true);
+    props.setRefresh(prev => prev + 1);
     googleSignOut();
     setAnchorEl(null);
   }

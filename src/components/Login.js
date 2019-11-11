@@ -4,14 +4,12 @@ import Button from "@material-ui/core/Button";
 import { GoogleLogin } from "react-google-login";
 import background from "./images/background/bg.jpg";
 import "./Login.css";
-import { userCheck } from "../helpers/fetchData";
 
 export default function Login(props) {
   function onSuccess(response) {
     Cookies.set("user", response.profileObj.givenName, { expires: 7 });
     Cookies.set("email", response.profileObj.email, { expires: 7 });
-    props.setAuthRefresh(true);
-    userCheck();
+    props.setRefresh(prev => prev + 1);
   }
 
   function onFailure(response) {
@@ -21,8 +19,7 @@ export default function Login(props) {
   function guestLogin() {
     Cookies.set("user", "Guest", { expires: 1 });
     Cookies.set("email", "guest-login", { expires: 1 });
-    props.setAuthRefresh(true);
-    userCheck();
+    props.setRefresh(prev => prev + 1);
   }
 
   return (

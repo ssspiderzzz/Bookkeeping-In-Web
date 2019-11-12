@@ -51,7 +51,7 @@ export default function NewOrder(props) {
   function handleSubmit() {
     if (newOrder.customer_name && newOrder.order_status) {
       axios
-        .post("/api/new", { newOrder: newOrder })
+        .post("/api/create", { newOrder: newOrder })
         .then(() => {
           window.location.href = "/lists";
         })

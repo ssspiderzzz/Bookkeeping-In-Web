@@ -1,0 +1,31 @@
+#confirmBox {
+  background-color: pink;
+  border: solid 3px red;
+  border-radius: 10px;
+  height: 100%;
+  padding: 5px;
+  text-align: center;
+}
+
+#delete_message {
+  color: red;
+  margin: 1vw;
+}
+
+#yes,
+#no {
+  cursor: pointer;
+  outline: none;
+  background-color: pink;
+  border: solid 1px red;
+  border-radius: 5px;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-bottom: 1vw;
+  transition: all ease-in-out 0.5s;
+}
+
+#yes:hover,
+#no:hover {
+  background-color: palevioletred;
+}

@@ -9,7 +9,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Cookies from "js-cookie";
-import { GoogleLogout } from "react-google-login";
 import "./MenuAppBar.css";
 
 const useStyles = makeStyles(theme => ({
@@ -110,18 +109,6 @@ export default function MenuAppBar(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Account Settings</MenuItem>
-                {props.auth.email !== "guest-login" && (
-                  <MenuItem>
-                    <GoogleLogout
-                      id="googleLogout"
-                      clientId="680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
-                      buttonText="Logout"
-                      onLogoutSuccess={onLogout}
-                      icon={false}
-                    />
-                  </MenuItem>
-                )}
-
                 <MenuItem onClick={onLogout}>Logout</MenuItem>
               </Menu>
             </div>

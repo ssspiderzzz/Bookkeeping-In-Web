@@ -53,7 +53,7 @@ export default function NewOrder(props) {
       axios
         .post("/api/new", { newOrder: newOrder })
         .then(() => {
-          window.location.href = "/";
+          window.location.href = "/lists";
         })
         .catch(err => console.log(err));
       setErrorCheck(false);

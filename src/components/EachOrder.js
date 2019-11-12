@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toLocaleTime } from "../helpers/functions";
 import axios from "axios";
 import ButtonIcon from "./ButtonIcon";
+import "./EachOrder.css";
 
 export default function EachOrder(props) {
   const [deleteMessage, setDeleteMessage] = useState("");
@@ -11,17 +12,21 @@ export default function EachOrder(props) {
     props.setEditID(id);
   }
 
+  function confirm(id) {
+    setDeleteID(id);
+    setDeleteMessage(`Deleting order #${id}, are you sure?`);
+  }
+
+  function back() {
+    setDeleteID(``);
+    setDeleteMessage(``);
+  }
+
   function handleDelete(id) {
     axios
       .post(`/api/delete/${id}`)
       .then(() => {
-        setDeleteID(id);
-        setDeleteMessage(
-          `Order#${id} has been deleted. Page would be refreshed in 3 seconds.`
-        );
-        setTimeout(() => {
-          props.setRefresh(true);
-        }, 3000);
+        props.setRefresh(true);
       })
       .catch(err => console.log(err));
   }
@@ -66,16 +71,29 @@ export default function EachOrder(props) {
       </div>
       <div id="button_group">
         {deleteMessage && deleteID === props.order.id && (
-          <span id="delete_message">{deleteMessage}</span>
+          <div id="confirmBox">
+            <p id="delete_message">{deleteMessage}</p>
+            <button id="yes" onClick={() => handleDelete(props.order.id)}>
+              YES
+            </button>
+            <button id="no" onClick={back}>
+              NO
+            </button>
+          </div>
         )}
-        <ButtonIcon
-          icon_type="edit"
-          action={() => handleEdit(props.order.id)}
-        />
-        <ButtonIcon
-          icon_type="delete"
-          action={() => handleDelete(props.order.id)}
-        />
+        {!deleteMessage &&
+          (deleteID !== props.order.id && (
+            <React.Fragment>
+              <ButtonIcon
+                icon_type="edit"
+                action={() => handleEdit(props.order.id)}
+              />
+              <ButtonIcon
+                icon_type="delete"
+                action={() => confirm(props.order.id)}
+              />
+            </React.Fragment>
+          ))}
       </div>
     </React.Fragment>
   );

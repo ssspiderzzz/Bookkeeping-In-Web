@@ -26,6 +26,8 @@ export default function EachOrder(props) {
     axios
       .post(`/api/delete/${id}`)
       .then(() => {
+        setDeleteID(``);
+        setDeleteMessage(``);
         props.setRefresh(true);
       })
       .catch(err => console.log(err));

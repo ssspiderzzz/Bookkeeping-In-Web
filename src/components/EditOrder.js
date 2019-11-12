@@ -52,11 +52,11 @@ export default function EditOrder(props) {
       axios
         .post("/api/edit/", { editOrder: editOrder })
         .then(() => {
-          props.setRefresh(true);
+          props.setRefresh(prev => prev + 1);
+          props.setEditID("");
         })
         .catch(err => console.log(err));
       setErrorCheck(false);
-      props.setEditID("");
     } else {
       setErrorCheck(true);
     }

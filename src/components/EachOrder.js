@@ -28,7 +28,7 @@ export default function EachOrder(props) {
       .then(() => {
         setDeleteID(``);
         setDeleteMessage(``);
-        props.setRefresh(true);
+        props.setRefresh(prev => prev + 1);
       })
       .catch(err => console.log(err));
   }

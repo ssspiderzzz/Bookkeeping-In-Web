@@ -5,13 +5,13 @@ A web based online bookkeeping application which allows users to create, edit an
 # Main Features
 
 Users can login with their google account without signing up. No password is needed, all the data securely stores in the database. A guest account is for users who wants to overview the basic features of the app.
-!["Screenshot for Bookkeeping-In-Web Feature 1"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/tree/master/public/screenshots/1.jpg)
+!["Screenshot for Bookkeeping-In-Web Feature 1"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/blob/master/public/screenshots/1.jpg)
 
 After logged in, users can create order by clicking the "ADD NEW" button. The "Order Status" is customizable in user setting (in progress).
-!["Screenshot for Bookkeeping-In-Web Feature 2"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/tree/master/public/screenshots/2.jpg)
+!["Screenshot for Bookkeeping-In-Web Feature 2"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/blob/master/public/screenshots/2.jpg)
 
 Users can view, modify and delete their orders in "ALL LISTS".
-!["Screenshot for Bookkeeping-In-Web Feature 3"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/tree/master/public/screenshots/3.jpg)
+!["Screenshot for Bookkeeping-In-Web Feature 3"](https://github.com/ssspiderzzz/Bookkeeping-In-Web/blob/master/public/screenshots/3.jpg)
 
 ## Future Features
 

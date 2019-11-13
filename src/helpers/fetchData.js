@@ -3,18 +3,20 @@ import _ from "lodash";
 
 export function fetchAllData(setState) {
   console.log("Fetching data from server...");
-  axios.get("/api/userCheck").then(res_userCheck => {
-    if (res_userCheck.data.id) {
-      axios.get("/api/data").then(res => {
-        console.log(res.data.orders.rows);
-        console.log(res.data.items.rows);
-        setState({
-          orders: _.orderBy(res.data.orders.rows, "id", "desc"),
-          items: _.orderBy(res.data.items.rows, "id")
+  axios
+    .get("/api/userCheck", { credentials: "include" })
+    .then(res_userCheck => {
+      if (res_userCheck.data.id) {
+        axios.get("/api/data").then(res => {
+          console.log(res.data.orders.rows);
+          console.log(res.data.items.rows);
+          setState({
+            orders: _.orderBy(res.data.orders.rows, "id", "desc"),
+            items: _.orderBy(res.data.items.rows, "id")
+          });
         });
-      });
-    } else {
-      console.log(`No users found`);
-    }
-  });
+      } else {
+        console.log(`No users found`);
+      }
+    });
 }

@@ -3,7 +3,7 @@ import _ from "lodash";
 
 export function fetchAllData(setState) {
   console.log("Fetching data from server...");
-  axios.get("/api/userCheck").then(res_userCheck => {
+  axios.get("/api/userCheck", { withCredentials: true }).then(res_userCheck => {
     if (res_userCheck.data.id) {
       axios.get("/api/data").then(res => {
         console.log(res.data.orders.rows);

@@ -1,11 +1,12 @@
 import axios from "axios";
 import _ from "lodash";
 
-export function fetchAllData(setState) {
+export function fetchAllData(setState, email) {
   console.log("Fetching data from server...");
   axios
     .get("/api/userCheck", {
-      withCredentials: true
+      withCredentials: true,
+      email: email
     })
     .then(res_userCheck => {
       if (res_userCheck.data.id) {

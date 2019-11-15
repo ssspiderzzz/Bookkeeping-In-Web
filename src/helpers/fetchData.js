@@ -15,8 +15,7 @@ export function fetchAllData(setState, email) {
             id: res_userCheck.data.id
           })
           .then(res => {
-            console.log(res.data.orders.rows);
-            console.log(res.data.items.rows);
+            if (res.data.orders.rows) console.log(`Data received`);
             setState({
               orders: _.orderBy(res.data.orders.rows, "id", "desc"),
               items: _.orderBy(res.data.items.rows, "id")

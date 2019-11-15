@@ -4,20 +4,24 @@ import _ from "lodash";
 export function fetchAllData(setState, email) {
   console.log("Fetching data from server...");
   axios
-    .get("/api/userCheck", {
+    .post("/api/userCheck", {
       withCredentials: true,
       email: email
     })
     .then(res_userCheck => {
       if (res_userCheck.data.id) {
-        axios.get("/api/data").then(res => {
-          console.log(res.data.orders.rows);
-          console.log(res.data.items.rows);
-          setState({
-            orders: _.orderBy(res.data.orders.rows, "id", "desc"),
-            items: _.orderBy(res.data.items.rows, "id")
+        axios
+          .post(`/api/data`, {
+            id: res_userCheck.data.id
+          })
+          .then(res => {
+            console.log(res.data.orders.rows);
+            console.log(res.data.items.rows);
+            setState({
+              orders: _.orderBy(res.data.orders.rows, "id", "desc"),
+              items: _.orderBy(res.data.items.rows, "id")
+            });
           });
-        });
       } else {
         console.log(`No users found`);
       }

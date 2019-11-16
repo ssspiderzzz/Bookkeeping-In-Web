@@ -15,7 +15,7 @@ export default function Login(props) {
     const config = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
-    axios.post(`/api/verify`, id_token, config, (req, res) => {
+    axios.post(`/api/verify`, { id_token: id_token }).then(res => {
       console.log(`id_token sent`);
       props.setRefresh(prev => prev + 1);
     });

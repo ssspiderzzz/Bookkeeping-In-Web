@@ -9,6 +9,7 @@ import NewOrder from "./components/NewOrder";
 import Login from "./components/Login";
 import "./App.css";
 import Cookies from "js-cookie";
+import { checkGoogleLogin } from "./helpers/checkGoogleLogin";
 
 export default function App(props) {
   const [state, setState] = useState("");
@@ -22,6 +23,7 @@ export default function App(props) {
       email: Cookies.get("email")
     });
     fetchAllData(setState, Cookies.get("email"));
+    checkGoogleLogin();
   }, [refresh]);
 
   return (

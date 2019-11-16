@@ -7,6 +7,7 @@ import "./Login.css";
 
 export default function Login(props) {
   function onSuccess(response) {
+    const id_token = response.getAuthResponse().id_token;
     Cookies.set("user", response.profileObj.givenName, { expires: 7 });
     Cookies.set("email", response.profileObj.email, { expires: 7 });
     props.setRefresh(prev => prev + 1);

@@ -20,7 +20,7 @@ export default function App(props) {
       user: Cookies.get("user"),
       email: Cookies.get("email")
     });
-    fetchAllData(setState);
+    fetchAllData(setState, Cookies.get("email"));
   }, [refresh]);
 
   return (

@@ -16,6 +16,26 @@ export default function App(props) {
   const [auth, setAuth] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [token, setToken] = useState("");
+  const [auth2, setAuth2] = useState(0);
+
+  useEffect(() => {
+    if (window.gapi.auth2) {
+      const GoogleAuth = window.gapi.auth2.getAuthInstance();
+      console.log(GoogleAuth.isSignedIn.get());
+
+      const GoogleUser = GoogleAuth.currentUser.get();
+      console.log("check if user is signed in:");
+      console.log(GoogleUser.isSignedIn());
+      console.log("user email:");
+      console.log(GoogleUser.getBasicProfile().getEmail());
+      console.log("get auth response:");
+      console.log(GoogleUser.getAuthResponse().id_token);
+      // GoogleAuth.signIn().then(response => {
+      //   const id_token = response.getAuthResponse().id_token;
+      //   console.log(id_token);
+      // });
+    }
+  }, [auth2]);
 
   useEffect(() => {
     setAuth({
@@ -23,13 +43,21 @@ export default function App(props) {
       email: Cookies.get("email")
     });
     fetchAllData(setState, Cookies.get("email"));
-    checkGoogleLogin();
+    // checkGoogleLogin();
   }, [refresh]);
 
   return (
     <div className="App">
       <MenuAppBar auth={auth} setRefresh={setRefresh} />
       <div id="main">
+        <button
+          onClick={() => {
+            setAuth2(prev => prev + 1);
+          }}
+        >
+          {" "}
+          check auth2 status{" "}
+        </button>
         <Router>
           <div id="nav_button">
             <Link to="/">

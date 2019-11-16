@@ -38,8 +38,8 @@ export default function MenuAppBar(props) {
 
   function googleSignOut() {
     if (window.gapi.auth2) {
-      var auth2 = window.gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
+      var GoogleAuth = window.gapi.auth2.getAuthInstance();
+      GoogleAuth.signOut().then(() => {
         console.log("User signed out.");
       });
     }

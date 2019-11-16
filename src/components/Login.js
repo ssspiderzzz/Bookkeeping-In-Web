@@ -4,13 +4,21 @@ import Button from "@material-ui/core/Button";
 import { GoogleLogin } from "react-google-login";
 import background from "./images/background/bg.jpg";
 import "./Login.css";
+import axios from "axios";
 
 export default function Login(props) {
   function onSuccess(response) {
-    const id_token = response.getAuthResponse().id_token;
     Cookies.set("user", response.profileObj.givenName, { expires: 7 });
     Cookies.set("email", response.profileObj.email, { expires: 7 });
-    props.setRefresh(prev => prev + 1);
+
+    const id_token = response.getAuthResponse().id_token;
+    const config = {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    axios.post(`/api/verify`, id_token, config, (req, res) => {
+      console.log(`id_token sent`);
+      props.setRefresh(prev => prev + 1);
+    });
   }
 
   function onFailure(response) {

@@ -14,6 +14,7 @@ export default function App(props) {
   const [state, setState] = useState("");
   const [auth, setAuth] = useState(false);
   const [refresh, setRefresh] = useState(0);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     setAuth({
@@ -55,7 +56,13 @@ export default function App(props) {
             <Route
               exact
               path="/"
-              render={() => <Login auth={auth} setRefresh={setRefresh} />}
+              render={() => (
+                <Login
+                  auth={auth}
+                  setToken={setToken}
+                  setRefresh={setRefresh}
+                />
+              )}
             />
             <Route
               exact

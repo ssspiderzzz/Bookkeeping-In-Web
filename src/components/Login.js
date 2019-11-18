@@ -8,15 +8,12 @@ import axios from "axios";
 
 export default function Login(props) {
   function onSuccess(response) {
-    Cookies.set("user", response.profileObj.givenName, { expires: 7 });
-    Cookies.set("email", response.profileObj.email, { expires: 7 });
-
     const id_token = response.getAuthResponse().id_token;
     // const config = {
     //   headers: { "Content-Type": "application/x-www-form-urlencoded" }
     // };
     axios.post(`/api/verify`, { id_token: id_token }).then(res_userCheck => {
-      console.log(`id_token sent`, res_userCheck.data.id);
+      console.log(`id_token sent`, res_userCheck.data);
       props.setRefresh(prev => prev + 1);
     });
   }

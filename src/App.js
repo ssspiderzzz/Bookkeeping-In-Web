@@ -8,42 +8,70 @@ import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
 import Login from "./components/Login";
 import "./App.css";
+import { gapi } from "gapi-script";
 import Cookies from "js-cookie";
-import { checkGoogleLogin } from "./helpers/checkGoogleLogin";
+import Axios from "axios";
 
 export default function App(props) {
   const [state, setState] = useState("");
   const [auth, setAuth] = useState(false);
   const [refresh, setRefresh] = useState(0);
-  const [token, setToken] = useState("");
   const [auth2, setAuth2] = useState(0);
 
   useEffect(() => {
-    if (window.gapi.auth2) {
-      const GoogleAuth = window.gapi.auth2.getAuthInstance();
-      console.log(GoogleAuth.isSignedIn.get());
-
-      const GoogleUser = GoogleAuth.currentUser.get();
-      console.log("check if user is signed in:");
-      console.log(GoogleUser.isSignedIn());
-      console.log("user email:");
-      console.log(GoogleUser.getBasicProfile().getEmail());
-      console.log("get auth response:");
-      console.log(GoogleUser.getAuthResponse().id_token);
+    window.onload = event => {
+      // const GoogleAuth = window.gapi.auth2.getAuthInstance();
+      // const GoogleUser = GoogleAuth.currentUser.get();
+      // console.log("check if user is signed in:");
+      // console.log(GoogleUser.isSignedIn());
+      // console.log("user email:");
+      // console.log(GoogleUser.getBasicProfile().getEmail());
+      // console.log("get auth response:");
+      // console.log(GoogleUser.getAuthResponse().id_token);
       // GoogleAuth.signIn().then(response => {
       //   const id_token = response.getAuthResponse().id_token;
       //   console.log(id_token);
       // });
-    }
+      console.log(`Data refresh on window fully loaded...`);
+      const GoogleAuth = window.gapi.auth2.getAuthInstance();
+      GoogleAuth.init({
+        client_id:
+          "680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
+      }).then(() => {
+        const GoogleUser = GoogleAuth.currentUser.get();
+        console.log("check if user is signed in:");
+        console.log(GoogleUser.isSignedIn());
+        console.log("user email:");
+        console.log(GoogleUser.getBasicProfile().getEmail());
+        console.log("get auth response:");
+        console.log(GoogleUser.getAuthResponse().id_token);
+      });
+      // if (GoogleUser.isSignedIn()) {
+      //   console.log(`Google user sign in detected...`);
+      //   setAuth({
+      //     user: GoogleUser.getBasicProfile().getGivenName(),
+      //     email: GoogleUser.getBasicProfile().getEmail()
+      //   });
+      //   fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
+      // }
+    };
   }, [auth2]);
 
   useEffect(() => {
-    setAuth({
-      user: Cookies.get("user"),
-      email: Cookies.get("email")
-    });
-    fetchAllData(setState, Cookies.get("email"));
-    // checkGoogleLogin();
+    if (window.gapi.auth2) {
+      console.log(`Data refreshing...`);
+      const GoogleAuth = window.gapi.auth2.getAuthInstance();
+      const GoogleUser = GoogleAuth.currentUser.get();
+      console.log(GoogleUser.isSignedIn());
+      if (GoogleUser.isSignedIn()) {
+        console.log(`Google user sign in detected...`);
+        setAuth({
+          user: GoogleUser.getBasicProfile().getGivenName(),
+          email: GoogleUser.getBasicProfile().getEmail()
+        });
+        fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
+      }
+    }
   }, [refresh]);
 
   return (
@@ -87,11 +115,7 @@ export default function App(props) {
               exact
               path="/"
               render={() => (
-                <Login
-                  auth={auth}
-                  setToken={setToken}
-                  setRefresh={setRefresh}
-                />
+                <Login auth={auth} setAuth={setAuth} setRefresh={setRefresh} />
               )}
             />
             <Route

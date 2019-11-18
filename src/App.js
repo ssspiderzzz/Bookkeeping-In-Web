@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
+import history from "./history";
 import Button from "@material-ui/core/Button";
 import { Home, PostAdd, LibraryBooks } from "@material-ui/icons";
 import { fetchAllData, fetchGuestData } from "./helpers/fetchData";
@@ -69,9 +70,9 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <MenuAppBar auth={auth} setAuth={setAuth} setRefresh={setRefresh} />
-      <div id="main">
-        <Router>
+      <Router history={history}>
+        <MenuAppBar auth={auth} setAuth={setAuth} setRefresh={setRefresh} />
+        <div id="main">
           <div id="nav_button">
             <Link to="/">
               <Button id="HomeButton" variant="contained" color="default">
@@ -119,11 +120,13 @@ export default function App(props) {
             <Route
               exact
               path="/new"
-              render={() => auth.email && <NewOrder auth={auth} />}
+              render={() =>
+                auth.email && <NewOrder auth={auth} setRefresh={setRefresh} />
+              }
             />
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     </div>
   );
 }

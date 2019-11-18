@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -27,6 +28,7 @@ export default function MenuAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  let history = useHistory();
 
   function onLogout() {
     Cookies.remove("user");
@@ -38,6 +40,7 @@ export default function MenuAppBar(props) {
         GoogleAuth.signOut().then(() => {
           console.log("User signed out.");
           props.setRefresh(prev => prev + 1);
+          history.push("/");
         });
       });
     }

@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from "react";
+import { useHistory } from "react-router-dom";
 import reducer, {
   ADD_ITEM,
   EDIT_ITEM,
@@ -23,6 +24,7 @@ export default function NewOrder(props) {
       3: { description: "", price: "", quantity: "" }
     }
   });
+  let history = useHistory();
 
   const [errorCheck, setErrorCheck] = useState(false);
 
@@ -53,7 +55,8 @@ export default function NewOrder(props) {
       axios
         .post("/api/create", { newOrder: newOrder })
         .then(() => {
-          window.location.href = "/lists";
+          props.setRefresh(prev => prev + 1);
+          history.push("/lists");
         })
         .catch(err => console.log(err));
       setErrorCheck(false);

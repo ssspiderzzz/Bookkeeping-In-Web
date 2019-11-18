@@ -3,11 +3,10 @@ import _ from "lodash";
 
 export function fetchAllData(setState, id_token) {
   console.log("Fetching data from server...");
-  if (id_token) {
-    console.log(`inside usercheck`);
+  axios.post(`/api/verify`, { id_token: id_token }).then(res_userCheck => {
     axios
       .post(`/api/data`, {
-        id: id_token
+        id: res_userCheck.data
       })
       .then(res => {
         if (res.data.orders.rows) console.log(`Data received`);
@@ -16,7 +15,5 @@ export function fetchAllData(setState, id_token) {
           items: _.orderBy(res.data.items.rows, "id")
         });
       });
-  } else {
-    console.log(`No users found`);
-  }
+  });
 }

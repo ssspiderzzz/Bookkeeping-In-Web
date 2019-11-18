@@ -19,58 +19,42 @@ export default function App(props) {
   const [auth2, setAuth2] = useState(0);
 
   useEffect(() => {
-    window.onload = event => {
-      // const GoogleAuth = window.gapi.auth2.getAuthInstance();
-      // const GoogleUser = GoogleAuth.currentUser.get();
-      // console.log("check if user is signed in:");
-      // console.log(GoogleUser.isSignedIn());
-      // console.log("user email:");
-      // console.log(GoogleUser.getBasicProfile().getEmail());
-      // console.log("get auth response:");
-      // console.log(GoogleUser.getAuthResponse().id_token);
-      // GoogleAuth.signIn().then(response => {
-      //   const id_token = response.getAuthResponse().id_token;
-      //   console.log(id_token);
-      // });
+    window.onload = () => {
       console.log(`Data refresh on window fully loaded...`);
-      const GoogleAuth = window.gapi.auth2.getAuthInstance();
-      GoogleAuth.init({
-        client_id:
-          "680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com"
-      }).then(() => {
+      window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
         const GoogleUser = GoogleAuth.currentUser.get();
-        console.log("check if user is signed in:");
-        console.log(GoogleUser.isSignedIn());
-        console.log("user email:");
-        console.log(GoogleUser.getBasicProfile().getEmail());
-        console.log("get auth response:");
-        console.log(GoogleUser.getAuthResponse().id_token);
+        if (GoogleUser.isSignedIn()) {
+          console.log("check if user is signed in:");
+          console.log(GoogleUser.isSignedIn());
+          console.log("user email:");
+          console.log(GoogleUser.getBasicProfile().getEmail());
+          setAuth({
+            user: GoogleUser.getBasicProfile().getGivenName(),
+            email: GoogleUser.getBasicProfile().getEmail()
+          });
+          fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
+        } else {
+          console.log(`No user log in`);
+        }
       });
-      // if (GoogleUser.isSignedIn()) {
-      //   console.log(`Google user sign in detected...`);
-      //   setAuth({
-      //     user: GoogleUser.getBasicProfile().getGivenName(),
-      //     email: GoogleUser.getBasicProfile().getEmail()
-      //   });
-      //   fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
-      // }
     };
-  }, [auth2]);
+  }, []);
 
   useEffect(() => {
     if (window.gapi.auth2) {
       console.log(`Data refreshing...`);
-      const GoogleAuth = window.gapi.auth2.getAuthInstance();
-      const GoogleUser = GoogleAuth.currentUser.get();
-      console.log(GoogleUser.isSignedIn());
-      if (GoogleUser.isSignedIn()) {
-        console.log(`Google user sign in detected...`);
-        setAuth({
-          user: GoogleUser.getBasicProfile().getGivenName(),
-          email: GoogleUser.getBasicProfile().getEmail()
-        });
-        fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
-      }
+      window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
+        const GoogleUser = GoogleAuth.currentUser.get();
+        console.log(GoogleUser.isSignedIn());
+        if (GoogleUser.isSignedIn()) {
+          console.log(`Google user sign in detected...`);
+          setAuth({
+            user: GoogleUser.getBasicProfile().getGivenName(),
+            email: GoogleUser.getBasicProfile().getEmail()
+          });
+          fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
+        }
+      });
     }
   }, [refresh]);
 

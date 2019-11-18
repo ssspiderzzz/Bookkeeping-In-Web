@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Cookies from "js-cookie";
 import "./MenuAppBar.css";
-import { gapi } from "gapi-script";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,18 +29,12 @@ export default function MenuAppBar(props) {
   const open = Boolean(anchorEl);
 
   function onLogout() {
-    Cookies.remove("email");
-    Cookies.remove("user");
-    googleSignOut();
-    setAnchorEl(null);
-    props.setRefresh(prev => prev + 1);
-  }
-
-  function googleSignOut() {
-    if (gapi.auth2) {
-      var GoogleAuth = gapi.auth2.getAuthInstance();
-      GoogleAuth.signOut().then(() => {
-        console.log("User signed out.");
+    if (window.gapi.auth2) {
+      window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
+        GoogleAuth.signOut().then(() => {
+          console.log("User signed out.");
+          props.setRefresh(prev => prev + 1);
+        });
       });
     }
   }

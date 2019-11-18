@@ -8,15 +8,12 @@ import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
 import Login from "./components/Login";
 import "./App.css";
-import { gapi } from "gapi-script";
 import Cookies from "js-cookie";
-import Axios from "axios";
 
 export default function App(props) {
   const [state, setState] = useState("");
   const [auth, setAuth] = useState(false);
   const [refresh, setRefresh] = useState(0);
-  const [auth2, setAuth2] = useState(0);
 
   useEffect(() => {
     window.onload = () => {
@@ -62,14 +59,6 @@ export default function App(props) {
     <div className="App">
       <MenuAppBar auth={auth} setRefresh={setRefresh} />
       <div id="main">
-        <button
-          onClick={() => {
-            setAuth2(prev => prev + 1);
-          }}
-        >
-          {" "}
-          check auth2 status{" "}
-        </button>
         <Router>
           <div id="nav_button">
             <Link to="/">

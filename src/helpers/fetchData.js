@@ -17,3 +17,18 @@ export function fetchAllData(setState, id_token) {
       });
   });
 }
+
+export function fetchGuestData(setState) {
+  console.log("Fetching data from server...(Guest)");
+  axios
+    .post(`/api/data`, {
+      id: 1
+    })
+    .then(res => {
+      if (res.data.orders.rows) console.log(`Data received (Guest)`);
+      setState({
+        orders: _.orderBy(res.data.orders.rows, "id", "desc"),
+        items: _.orderBy(res.data.items.rows, "id")
+      });
+    });
+}

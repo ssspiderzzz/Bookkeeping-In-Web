@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { Home, PostAdd, LibraryBooks } from "@material-ui/icons";
-import { fetchAllData } from "./helpers/fetchData";
+import { fetchAllData, fetchGuestData } from "./helpers/fetchData";
 import MenuAppBar from "./components/MenuAppBar";
 import Table from "./components/Table";
 import NewOrder from "./components/NewOrder";
@@ -17,28 +17,40 @@ export default function App(props) {
 
   useEffect(() => {
     window.onload = () => {
-      console.log(`Data refresh on window fully loaded...`);
-      window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
-        const GoogleUser = GoogleAuth.currentUser.get();
-        if (GoogleUser.isSignedIn()) {
-          console.log("check if user is signed in:");
-          console.log(GoogleUser.isSignedIn());
-          console.log("user email:");
-          console.log(GoogleUser.getBasicProfile().getEmail());
-          setAuth({
-            user: GoogleUser.getBasicProfile().getGivenName(),
-            email: GoogleUser.getBasicProfile().getEmail()
-          });
-          fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
-        } else {
-          console.log(`No user log in`);
-        }
-      });
+      if (!Cookies.get("user") && window.gapi.auth2) {
+        console.log(`Data refresh on window fully loaded...`);
+        window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
+          const GoogleUser = GoogleAuth.currentUser.get();
+          if (GoogleUser.isSignedIn()) {
+            console.log("check if user is signed in:");
+            console.log(GoogleUser.isSignedIn());
+            console.log("user email:");
+            console.log(GoogleUser.getBasicProfile().getEmail());
+            setAuth({
+              user: GoogleUser.getBasicProfile().getGivenName(),
+              email: GoogleUser.getBasicProfile().getEmail()
+            });
+            fetchAllData(setState, GoogleUser.getAuthResponse().id_token);
+          } else {
+            console.log(`No login user`);
+          }
+        });
+      } else {
+        console.log("error");
+      }
     };
   }, []);
 
   useEffect(() => {
-    if (window.gapi.auth2) {
+    if (Cookies.get("user")) {
+      console.log(`Guest user login`);
+      setAuth({
+        user: Cookies.get("user"),
+        email: Cookies.get("email")
+      });
+      fetchGuestData(setState);
+    }
+    if (!Cookies.get("user") && window.gapi.auth2) {
       console.log(`Data refreshing...`);
       window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
         const GoogleUser = GoogleAuth.currentUser.get();
@@ -57,7 +69,7 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <MenuAppBar auth={auth} setRefresh={setRefresh} />
+      <MenuAppBar auth={auth} setAuth={setAuth} setRefresh={setRefresh} />
       <div id="main">
         <Router>
           <div id="nav_button">

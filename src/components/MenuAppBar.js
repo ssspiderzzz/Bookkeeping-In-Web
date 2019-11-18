@@ -29,10 +29,13 @@ export default function MenuAppBar(props) {
   const open = Boolean(anchorEl);
 
   function onLogout() {
+    Cookies.remove("user");
+    Cookies.remove("email");
+    props.setAuth(false);
+    handleClose();
     if (window.gapi.auth2) {
       window.gapi.auth2.getAuthInstance().then(GoogleAuth => {
         GoogleAuth.signOut().then(() => {
-          props.setAuth(false);
           console.log("User signed out.");
           props.setRefresh(prev => prev + 1);
         });

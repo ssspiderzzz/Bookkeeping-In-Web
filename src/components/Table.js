@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import EachOrder from "./EachOrder";
-import EditOrder from "./EditOrder";
-import "./Table.css";
+import React, { useState } from 'react'
+import EachOrder from './EachOrder'
+import EditOrder from './EditOrder'
+import './Table.css'
+import Loading from './Loading'
 
-export default function Table(props) {
-  const [editID, setEditID] = useState("");
+export default function Table (props) {
+  const [editID, setEditID] = useState('')
 
   return (
     <React.Fragment>
-      {props.orders &&
+      {props.orders ? (
         props.orders.map((order, order_index) => {
           // changing the format of items from array to object
           // keeping codes consistancy between NewOrder and EditOrder pages
-          const order_items = {};
+          const order_items = {}
           props.items
             .filter(item => item.order_id === order.id)
-            .map((item, item_index) => (order_items[item_index] = item));
+            .map((item, item_index) => (order_items[item_index] = item))
           return (
             <React.Fragment key={order_index}>
               {order.id !== editID && (
@@ -35,8 +36,11 @@ export default function Table(props) {
                 />
               )}
             </React.Fragment>
-          );
-        })}
+          )
+        })
+      ) : (
+        <Loading />
+      )}
     </React.Fragment>
-  );
+  )
 }

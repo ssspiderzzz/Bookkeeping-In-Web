@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import { GoogleLogin } from 'react-google-login'
 import background from './images/background/bg.jpg'
 import './Login.css'
+import Dashboard from './Dashboard'
 
 export default function Login (props) {
   function onSuccess (response) {
@@ -34,7 +35,7 @@ export default function Login (props) {
   return (
     <React.Fragment>
       <img id='background' src={background} alt='background'></img>
-      {!props.auth.user && !props.auth.email && (
+      {!props.auth.user && !props.auth.email ? (
         <div id='signInContainer'>
           <GoogleLogin
             clientId='680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com'
@@ -53,6 +54,8 @@ export default function Login (props) {
             Sign in as Guest
           </Button>
         </div>
+      ) : (
+        <Dashboard auth={props.auth} />
       )}
     </React.Fragment>
   )

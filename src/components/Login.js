@@ -34,28 +34,33 @@ export default function Login (props) {
 
   return (
     <React.Fragment>
-      <img id='background' src={background} alt='background'></img>
       {!props.auth.user && !props.auth.email ? (
-        <div id='signInContainer'>
-          <GoogleLogin
-            clientId='680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com'
-            scope='profile'
-            buttonText='Sign in with Google'
-            uxMode='popup'
-            redirectUri='http://localhost:3000'
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            theme={'dark'}
-            cookiePolicy={'single_host_origin'}
-          />
-          <br />
-          <p>OR</p>
-          <Button onClick={guestLogin} variant='contained' color='primary'>
-            Sign in as Guest
-          </Button>
-        </div>
+        <React.Fragment>
+          <img id='background' src={background} alt='background'></img>
+          <div id='signInContainer'>
+            <GoogleLogin
+              clientId='680587798801-qp0mndlka16fgm91ed97gkoot3ru5145.apps.googleusercontent.com'
+              scope='profile'
+              buttonText='Sign in with Google'
+              uxMode='popup'
+              redirectUri='http://localhost:3000'
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              theme={'dark'}
+              cookiePolicy={'single_host_origin'}
+            />
+            <br />
+            <p>OR</p>
+            <Button onClick={guestLogin} variant='contained' color='primary'>
+              Sign in as Guest
+            </Button>
+          </div>
+        </React.Fragment>
       ) : (
-        <Dashboard auth={props.auth} />
+        <React.Fragment>
+          <img id='background' src={background} alt='background'></img>
+          <Dashboard auth={props.auth} />
+        </React.Fragment>
       )}
     </React.Fragment>
   )

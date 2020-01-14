@@ -1,13 +1,9 @@
 #dashboardContainer {
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 3vw;
   padding: 4vw;
   width: fit-content;
   margin-right: auto;
   margin-left: auto;
   transition: all ease-in-out 0.5s;
-}
-
-#dashboardContainer:hover {
-  background-color: rgba(255, 255, 255, 0.9);
 }

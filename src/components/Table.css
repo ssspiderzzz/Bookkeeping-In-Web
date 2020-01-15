@@ -16,3 +16,11 @@
   opacity: 0.7;
   color: black;
 }
+
+#tableRoot td,
+#tableRoot th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+  width: 25%;
+}

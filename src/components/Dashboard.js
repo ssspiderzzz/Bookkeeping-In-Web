@@ -1,27 +1,36 @@
 import React from 'react'
 import './Dashboard.css'
+import moment from 'moment'
 
 export default function Dashboard (props) {
   const vertical_line = {
-    borderLeft: '1px solid grey',
-    height: '10px',
-    margin: '5px'
+    borderRight: '2px solid grey'
   }
   return (
     <div id='dashboardContainer'>
-      <div>Log in as {props.auth.user}</div>
+      <div>{moment().format('MMM, YYYY')}</div>
       <br />
-      <span>Income</span>
-      <span style={vertical_line}></span>
-      <span>Spending</span>
-      <span style={vertical_line}></span>
-      <span>Earning</span>
-      <br />
-      <span>0</span>
-      <span style={vertical_line}></span>
-      <span>2</span>
-      <span style={vertical_line}></span>
-      <span>13.31</span>
+
+      <table id='dashboardTable'>
+        <thead>
+          <tr>
+            <th scope='col' style={vertical_line}>
+              Income
+            </th>
+            <th scope='col' style={vertical_line}>
+              Spending
+            </th>
+            <th scope='col'>Earning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0.2</td>
+            <td>13.44</td>
+            <td>322.22</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }

@@ -17,6 +17,21 @@
   color: black;
 }
 
+#editOrderTable td,
+#editOrderTable th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+  width: 25%;
+}
+
+#editOrderTable td input,
+#editOrderTable th input {
+  width: 90%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
 #errorEmpty {
   color: red;
 }

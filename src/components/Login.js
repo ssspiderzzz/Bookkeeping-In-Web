@@ -59,7 +59,7 @@ export default function Login (props) {
       ) : (
         <React.Fragment>
           <img id='background' src={background} alt='background'></img>
-          <Dashboard auth={props.auth} />
+          <Dashboard auth={props.auth} data={props.data} />
         </React.Fragment>
       )}
     </React.Fragment>

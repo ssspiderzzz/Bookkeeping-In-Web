@@ -6,6 +6,11 @@ export default function Dashboard (props) {
   const vertical_line = {
     borderRight: '2px solid grey'
   }
+  console.log(props.data)
+  // const income = props.data.items.reduce((total, num) => {
+  //   return total + num
+  // })
+  // console.log(income)
   return (
     <div id='dashboardContainer'>
       <div>{moment().format('MMM, YYYY')}</div>

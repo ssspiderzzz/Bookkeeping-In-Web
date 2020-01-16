@@ -101,7 +101,12 @@ export default function App (props) {
               exact
               path='/'
               render={() => (
-                <Login auth={auth} setAuth={setAuth} setRefresh={setRefresh} />
+                <Login
+                  auth={auth}
+                  setAuth={setAuth}
+                  setRefresh={setRefresh}
+                  data={state}
+                />
               )}
             />
             <Route

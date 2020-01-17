@@ -8,15 +8,13 @@ export default function Dashboard (props) {
   }
   // console.log(props.data.items)
   let income = 0
-  props.data.items.reduce((a, b) => {
-    console.log(a.sub_total, b.sub_total)
-    if (a.sub_total) {
-      income += a.sub_total
-    }
-    income += b.sub_total
-    return income
+  let spending = 0
+  props.data.items.forEach(i => {
+    if (i.sub_total > 0) income += i.sub_total
+
+    if (i.sub_total < 0) spending += i.sub_total
   })
-  console.log(income)
+  let earning = income - spending
   return (
     <div id='dashboardContainer'>
       <div>{moment().format('MMM, YYYY')}</div>
@@ -36,9 +34,9 @@ export default function Dashboard (props) {
         </thead>
         <tbody>
           <tr>
-            <td>0.2</td>
-            <td>13.44</td>
-            <td>322.22</td>
+            <td>{income}</td>
+            <td>{spending}</td>
+            <td>{earning}</td>
           </tr>
         </tbody>
       </table>

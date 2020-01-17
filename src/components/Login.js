@@ -5,6 +5,7 @@ import { GoogleLogin } from 'react-google-login'
 import background from './images/background/bg.jpg'
 import './Login.css'
 import Dashboard from './Dashboard'
+import Loading from './Loading'
 
 export default function Login (props) {
   function onSuccess (response) {
@@ -56,11 +57,13 @@ export default function Login (props) {
             </Button>
           </div>
         </React.Fragment>
-      ) : (
+      ) : props.data ? (
         <React.Fragment>
           <img id='background' src={background} alt='background'></img>
           <Dashboard auth={props.auth} data={props.data} />
         </React.Fragment>
+      ) : (
+        <Loading />
       )}
     </React.Fragment>
   )

@@ -1,11 +1,17 @@
 import React from 'react'
 import './Dashboard.css'
 import moment from 'moment'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 export default function Dashboard (props) {
   const vertical_line = {
     borderRight: '2px solid grey'
   }
+
+  function handleAdd () {
+    console.log(`clicked`)
+  }
+
   // console.log(props.data.items)
   let income = 0
   let spending = 0
@@ -19,7 +25,6 @@ export default function Dashboard (props) {
     <div id='dashboardContainer'>
       <div>{moment().format('MMM, YYYY')}</div>
       <br />
-
       <table id='dashboardTable'>
         <thead>
           <tr>
@@ -40,6 +45,12 @@ export default function Dashboard (props) {
           </tr>
         </tbody>
       </table>
+      <AddCircleIcon
+        id='AddCircleIcon'
+        onClick={handleAdd}
+        color='primary'
+        fontSize='large'
+      />
     </div>
   )
 }

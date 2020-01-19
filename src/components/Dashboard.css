@@ -22,3 +22,9 @@
 #dashboardTable th {
   padding: 10px;
 }
+
+#AddCircleIcon {
+  cursor: pointer;
+  margin-left: 80%;
+  margin-top: 20%;
+}

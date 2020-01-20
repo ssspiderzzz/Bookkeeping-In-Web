@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Dashboard.css'
 import moment from 'moment'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
@@ -45,12 +46,14 @@ export default function Dashboard (props) {
           </tr>
         </tbody>
       </table>
-      <AddCircleIcon
-        id='AddCircleIcon'
-        onClick={handleAdd}
-        color='primary'
-        fontSize='large'
-      />
+      <Link to='/new'>
+        <AddCircleIcon
+          id='AddCircleIcon'
+          onClick={handleAdd}
+          color='primary'
+          fontSize='large'
+        />
+      </Link>
     </div>
   )
 }

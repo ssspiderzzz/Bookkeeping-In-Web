@@ -51,7 +51,7 @@ export default function Dashboard (props) {
           id='AddCircleIcon'
           onClick={handleAdd}
           color='primary'
-          fontSize='large'
+          fontSize='inherit'
         />
       </Link>
     </div>

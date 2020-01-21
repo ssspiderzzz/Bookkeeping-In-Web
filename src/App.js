@@ -80,12 +80,6 @@ export default function App (props) {
                 Home
               </Button>
             </Link>
-            <Link to='/new'>
-              <Button id='PostAddButton' variant='contained' color='primary'>
-                <PostAdd id='PostAddIcon' />
-                Add New
-              </Button>
-            </Link>
             <Link to='/lists'>
               <Button
                 id='LibraryBooksButton'

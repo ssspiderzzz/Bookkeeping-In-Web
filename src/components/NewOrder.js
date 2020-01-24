@@ -9,6 +9,7 @@ import axios from 'axios'
 import './NewOrder.css'
 import DropdownList from './DropdownList'
 import ButtonIcon from './ButtonIcon'
+import Checkbox from '@material-ui/core/Checkbox'
 
 export default function NewOrder (props) {
   const [newOrder, dispatch] = useReducer(reducer, {
@@ -65,13 +66,32 @@ export default function NewOrder (props) {
     }
   }
 
+  const [checked, setChecked] = useState(false)
+
+  const handleChange = event => {
+    setChecked(event.target.checked)
+  }
+
   return (
     <React.Fragment>
       {errorCheck && (
         <div id='errorEmpty'>Please enter Customer Name and Status.</div>
       )}
-      <span>Spend</span>
-      <span>Earn</span>
+
+      <span>Earning</span>
+      <Checkbox
+        defaultChecked
+        value='secondary'
+        color='primary'
+        inputProps={{ 'aria-label': 'secondary checkbox' }}
+      />
+      <span>Spending</span>
+      <Checkbox
+        checked={checked}
+        onChange={handleChange}
+        value='primary'
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
       <div id='newOrderTable'>
         <table className='box-table'>
           <thead id='tableHead'>

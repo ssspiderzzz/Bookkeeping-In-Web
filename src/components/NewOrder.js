@@ -66,10 +66,12 @@ export default function NewOrder (props) {
     }
   }
 
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState({ earning: true, spending: false })
 
-  const handleChange = event => {
-    setChecked(event.target.checked)
+  const handleChange = () => {
+    checked.earning
+      ? setChecked({ earning: false, spending: true })
+      : setChecked({ earning: true, spending: false })
   }
 
   return (
@@ -80,14 +82,15 @@ export default function NewOrder (props) {
 
       <span>Earning</span>
       <Checkbox
-        defaultChecked
+        checked={checked.earning}
+        onChange={handleChange}
         value='secondary'
         color='primary'
         inputProps={{ 'aria-label': 'secondary checkbox' }}
       />
       <span>Spending</span>
       <Checkbox
-        checked={checked}
+        checked={checked.spending}
         onChange={handleChange}
         value='primary'
         inputProps={{ 'aria-label': 'primary checkbox' }}

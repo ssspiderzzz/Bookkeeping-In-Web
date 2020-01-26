@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom'
 import reducer, {
   ADD_ITEM,
   EDIT_ITEM,
-  EDIT_GENERAL_INFO
+  EDIT_GENERAL_INFO,
+  CHANGE_TYPE
 } from '../reducer/application'
 import axios from 'axios'
 import './NewOrder.css'
@@ -23,7 +24,8 @@ export default function NewOrder (props) {
       1: { description: '', price: '', quantity: '' },
       2: { description: '', price: '', quantity: '' },
       3: { description: '', price: '', quantity: '' }
-    }
+    },
+    type: 'earning'
   })
   let history = useHistory()
 
@@ -70,8 +72,17 @@ export default function NewOrder (props) {
 
   const handleChange = () => {
     checked.earning
-      ? setChecked({ earning: false, spending: true })
-      : setChecked({ earning: true, spending: false })
+      ? switchBetweenEarningSpending('spending')
+      : switchBetweenEarningSpending('earning')
+  }
+
+  const switchBetweenEarningSpending = type => {
+    if (type === 'earning') setChecked({ earning: true, spending: false })
+    if (type === 'spending') setChecked({ earning: false, spending: true })
+    dispatch({
+      type: CHANGE_TYPE,
+      value: type
+    })
   }
 
   return (

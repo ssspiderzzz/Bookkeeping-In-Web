@@ -27,5 +27,14 @@
   cursor: pointer;
   margin-left: 80%;
   margin-top: 20%;
-  font-size: 8vw;
+  font-size: 5vw;
+}
+
+@media (max-width: 800px) {
+  #AddCircleIcon {
+    cursor: pointer;
+    margin-left: 80%;
+    margin-top: 20%;
+    font-size: 8vw;
+  }
 }

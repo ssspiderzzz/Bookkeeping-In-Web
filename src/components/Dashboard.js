@@ -3,14 +3,11 @@ import { Link } from 'react-router-dom'
 import './Dashboard.css'
 import moment from 'moment'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
+import history from '../history'
 
 export default function Dashboard (props) {
   const vertical_line = {
     borderRight: '2px solid grey'
-  }
-
-  function handleAdd () {
-    console.log(`clicked`)
   }
 
   // console.log(props.data.items)
@@ -46,14 +43,14 @@ export default function Dashboard (props) {
           </tr>
         </tbody>
       </table>
-      <Link to='/new'>
-        <AddCircleIcon
-          id='AddCircleIcon'
-          onClick={handleAdd}
-          color='primary'
-          fontSize='inherit'
-        />
-      </Link>
+      <AddCircleIcon
+        id='AddCircleIcon'
+        onClick={() => history.push('/new')}
+        color='primary'
+        fontSize='inherit'
+      >
+        <span id='AddCircleIconText'>Create new order</span>
+      </AddCircleIcon>
     </div>
   )
 }

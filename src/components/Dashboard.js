@@ -45,9 +45,9 @@ export default function Dashboard (props) {
       </table>
       <div id='AddCircleIconFamily'>
         <span id='ArrowRightFamily'>
-          <img id='ArrowRight1' src={arrow_right} />
-          <img id='ArrowRight2' src={arrow_right} />
-          <img id='ArrowRight3' src={arrow_right} />
+          <img id='ArrowRight1' src={arrow_right} alt='' />
+          <img id='ArrowRight2' src={arrow_right} alt='' />
+          <img id='ArrowRight3' src={arrow_right} alt='' />
         </span>
         <span>
           <AddCircleIcon

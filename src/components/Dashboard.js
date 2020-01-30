@@ -3,6 +3,7 @@ import './Dashboard.css'
 import moment from 'moment'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import history from '../history'
+import arrow_right from './images/arrow-right.png'
 
 export default function Dashboard (props) {
   const vertical_line = {
@@ -42,14 +43,21 @@ export default function Dashboard (props) {
           </tr>
         </tbody>
       </table>
-      <AddCircleIcon
-        id='AddCircleIcon'
-        onClick={() => history.push('/new')}
-        color='primary'
-        fontSize='inherit'
-      >
-        <span id='AddCircleIconText'>Create new order</span>
-      </AddCircleIcon>
+      <div id='AddCircleIconFamily'>
+        <span id='ArrowRightFamily'>
+          <img id='ArrowRight1' src={arrow_right} />
+          <img id='ArrowRight2' src={arrow_right} />
+          <img id='ArrowRight3' src={arrow_right} />
+        </span>
+        <span>
+          <AddCircleIcon
+            id='AddCircleIcon'
+            onClick={() => history.push('/new')}
+            color='primary'
+            fontSize='inherit'
+          />
+        </span>
+      </div>
     </div>
   )
 }

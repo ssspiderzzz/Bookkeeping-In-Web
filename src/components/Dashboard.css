@@ -27,12 +27,53 @@
   width: 33%;
 }
 
+#AddCircleIconFamily {
+  margin-left: 70%;
+  margin-top: 25%;
+  padding-bottom: 5vw;
+}
+
 #AddCircleIcon {
   cursor: pointer;
-  margin-left: 75%;
-  margin-top: 25%;
   font-size: 5vw;
-  padding-bottom: 5vw;
+}
+
+#ArrowRightFamily img {
+  height: 4vw;
+  margin-left: -2.25vw;
+}
+
+@keyframes arrows {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#ArrowRight1 {
+  animation-name: arrows;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-delay: -2s;
+}
+
+#ArrowRight2 {
+  animation-name: arrows;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-delay: -1s;
+}
+
+#ArrowRight3 {
+  animation-name: arrows;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
 }
 
 @media (max-width: 800px) {
@@ -43,22 +84,9 @@
   #AddCircleIcon {
     font-size: 10vw;
   }
-}
 
-#AddCircleIconText {
-  visibility: visible;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 99;
-}
-
-#AddCircleIcon:hover #AddCircleIconText {
-  visibility: visible;
+  #ArrowRightFamily img {
+    height: 8vw;
+    margin-left: -4.5vw;
+  }
 }

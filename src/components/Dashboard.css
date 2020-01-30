@@ -1,11 +1,14 @@
 #dashboardContainer {
   background-color: rgb(255, 255, 255, 0.9);
   border-radius: 3vw;
-  padding: 4vw;
-  width: fit-content;
+  width: 70%;
   margin-right: auto;
   margin-left: auto;
   transition: all ease-in-out 0.5s;
+}
+
+#dashboardContainer .dates {
+  padding-top: 5vw;
 }
 
 #dashboardTable {
@@ -21,21 +24,24 @@
 
 #dashboardTable th {
   padding: 10px;
+  width: 33%;
 }
 
 #AddCircleIcon {
   cursor: pointer;
-  margin-left: 80%;
-  margin-top: 20%;
+  margin-left: 75%;
+  margin-top: 25%;
   font-size: 5vw;
+  padding-bottom: 5vw;
 }
 
 @media (max-width: 800px) {
+  #dashboardContainer {
+    width: 100%;
+  }
+
   #AddCircleIcon {
-    cursor: pointer;
-    margin-left: 80%;
-    margin-top: 20%;
-    font-size: 8vw;
+    font-size: 10vw;
   }
 }
 

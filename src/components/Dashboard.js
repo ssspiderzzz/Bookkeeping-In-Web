@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './Dashboard.css'
 import moment from 'moment'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
@@ -21,18 +20,18 @@ export default function Dashboard (props) {
   let earning = income - spending
   return (
     <div id='dashboardContainer'>
-      <div>{moment().format('MMM, YYYY')}</div>
+      <div className='dates'>{moment().format('MMM, YYYY')}</div>
       <br />
       <table id='dashboardTable'>
         <thead>
           <tr>
             <th scope='col' style={vertical_line}>
-              Income
+              Earning
             </th>
             <th scope='col' style={vertical_line}>
               Spending
             </th>
-            <th scope='col'>Earning</th>
+            <th scope='col'>Profit</th>
           </tr>
         </thead>
         <tbody>

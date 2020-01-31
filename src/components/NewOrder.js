@@ -169,6 +169,17 @@ export default function NewOrder (props) {
               )
             })}
           </tbody>
+          <thead id='tableHead'>
+            <tr id='order_id'>
+              <th>Note:</th>
+              <th colSpan='3'>
+                <input
+                  onChange={event => onGeneralInfoChange(event, 'note')}
+                  value={newOrder.note}
+                ></input>
+              </th>
+            </tr>
+          </thead>
         </table>
       </div>
       <div id='button_group'>

@@ -44,6 +44,7 @@ export default function Dashboard (props) {
         </tbody>
       </table>
       <div id='AddCircleIconFamily'>
+        <span style={{ marginRight: '3vw' }}>Create New</span>
         <span id='ArrowRightFamily'>
           <img id='ArrowRight1' src={arrow_right} alt='' />
           <img id='ArrowRight2' src={arrow_right} alt='' />
